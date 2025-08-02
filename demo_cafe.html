@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aklavya's Kitchen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujm9fG+v/J9E/h6X/w5J/p1A79Zz5z4g9H5b5j5+P/L+6G4A7r0Gq+1J8+6aF9z+5y/g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Global Variables and Dark Mode */
+    :root {
+      --primary-color: #f4f4f4;
+      --secondary-color: #ffffff;
+      --accent-color: #c0392b;
+      --text-light: #333;
+      --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease-in-out;
+      --sparkle-color: #ffcc00;
+    }
+
+    body.dark-mode {
+      --primary-color: #2c3e50;
+      --secondary-color: #34495e;
+      --accent-color: #e74c3c;
+      --text-light: #ecf0f1;
+      --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --sparkle-color: #fff899;
+    }
+
+    * {
+      box-sizing: border-box;
+      transition: var(--transition);
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: var(--primary-color);
+      animation: color-change 3s infinite;
+      color: var(--text-light);
+      margin: 0;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Background color change animation (3 times per second) */
+    @keyframes color-change {
+      0% { background-color: #e6f6ff; }
+      25% { background-color: #e6fff0; }
+      50% { background-color: #fff9e6; }
+      75% { background-color: #fff0e6; }
+      100% { background-color: #e6f6ff; }
+    }
+    
+    body.dark-mode {
+      animation: dark-color-change 3s infinite;
+    }
+
+    @keyframes dark-color-change {
+      0% { background-color: #2c3e50; }
+      25% { background-color: #1f4040; }
+      50% { background-color: #3a2c50; }
+      75% { background-color: #502c3a; }
+      100% { background-color: #2c3e50; }
+    }
+
+    /* Sparkle cursor effect */
+    .sparkle-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background-color: var(--sparkle-color);
+      box-shadow: 0 0 5px var(--sparkle-color);
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      animation: sparkle-fade 0.8s ease-out forwards;
+    }
+
+    @keyframes sparkle-fade {
+      0% { transform: scale(0) rotate(0deg); opacity: 0; }
+      20% { transform: scale(1) rotate(45deg); opacity: 0.8; }
+      80% { transform: scale(0.8) rotate(90deg); opacity: 0.6; }
+      100% { transform: scale(0) rotate(180deg); opacity: 0; }
+    }
+    
+    /* Dynamic foreground floating images with theme switching */
+    .foreground-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .floating-image {
+      position: absolute;
+      width: 80px;
+      height: auto;
+      opacity: 0.8;
+      transition: transform 10s linear, opacity 10s linear;
+    }
+
+    /* Floating cart button style */
+    .floating-cart-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: var(--accent-color);
+        color: var(--secondary-color);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        z-index: 1000;
+        font-size: 1.5em;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5em 3em;
+      background: var(--secondary-color);
+      box-shadow: var(--shadow-light);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--accent-color);
+      font-size: 2em;
+      margin: 0;
+    }
+
+    header h1:hover {
+      transform: translateY(-2px);
+      color: var(--text-light);
+      cursor: pointer;
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin: 0 1em;
+      font-weight: 700;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      display: block;
+      margin-top: 5px;
+      right: 0;
+      background: var(--accent-color);
+      transition: width 0.4s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+      left: 0;
+      background: var(--accent-color);
+    }
+
+    #themeToggle {
+      background: var(--accent-color);
+      border: none;
+      color: var(--secondary-color);
+      padding: 0.7em 1.5em;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    #themeToggle:hover {
+      transform: scale(1.05);
+      background: var(--text-light);
+      color: var(--accent-color);
+    }
+
+    .hero {
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 2em;
+      background: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      color: var(--secondary-color);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+    
+    .hero h2, .hero p {
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+    
+    .hero h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 4em;
+      margin: 0;
+      animation: fadeInFromTop 1s ease-out 0.5s forwards;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      max-width: 600px;
+      margin-top: 1em;
+      animation: fadeInFromBottom 1s ease-out 0.8s forwards;
+    }
+
+    @keyframes fadeInFromTop {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInFromBottom {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    section {
+      padding: 4em 2em;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 1em;
+      color: var(--accent-color);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .section-title:hover {
+      transform: translateY(-2px);
+    }
+
+    .menu-grid, .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2em;
+    }
+
+    .menu-item, .team-member, .offer-card {
+      background: var(--secondary-color);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow-light);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+    
+    .menu-item.visible, .team-member.visible, .offer-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Unique Card Animation on Hover */
+    .menu-item:hover, .team-member:hover, .offer-card:hover {
+      transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Bounce animation for menu items on hover */
+    @keyframes bounce-animation {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    .menu-item:hover {
+      animation: bounce-animation 0.5s ease-in-out;
+    }
+
+    .menu-item img, .team-member img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .menu-item-details, .team-member-details, .offer-card-details {
+      padding: 1.5em;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .menu-item h3, .team-member h3, .offer-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.4em;
+      margin: 0 0 0.5em 0;
+      color: var(--accent-color);
+    }
+
+    .menu-item p, .team-member p, .offer-card p {
+      font-size: 1em;
+      margin: 0;
+    }
+
+    .add-to-cart-btn {
+      margin-top: auto;
+      padding: 0.8em 1.5em;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: var(--text-light);
+    }
+    
+    .offer-card h3 {
+      color: #3498db;
+    }
+    
+    .offer-card button {
+      margin-top: auto;
+      padding: 1em;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .offer-card button:hover {
+      background-color: var(--text-light);
+    }
+
+    .menu-categories > div {
+      margin-bottom: 4em;
+    }
+
+    #about, #contact, #offers, footer {
+      background: var(--secondary-color);
+      border-radius: 10px;
+      padding: 3em;
+      margin: 2em auto;
+      box-shadow: var(--shadow-light);
+    }
+
+    #contact {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2em;
+    }
+
+    .contact-form, .contact-info {
+      flex: 1 1 400px;
+    }
+
+    .contact-info {
+        text-align: left;
+    }
+    
+    .contact-info h2 {
+      text-align: center;
+    }
+    
+    .contact-details {
+        margin-top: 2em;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5em;
+        font-size: 1.1em;
+    }
+
+    .contact-details div {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+    }
+    
+    .contact-details i {
+        color: var(--accent-color);
+        font-size: 1.5em;
+    }
+
+    .contact-form form {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .contact-form input, .contact-form textarea {
+        padding: 1em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background: var(--primary-color);
+        color: var(--text-light);
+        font-family: 'Raleway', sans-serif;
+    }
+    
+    .contact-form textarea {
+        resize: vertical;
+        min-height: 150px;
+    }
+
+    .contact-form button {
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    
+    .contact-form button:hover {
+        background-color: var(--text-light);
+    }
+    
+    #offers {
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+    }
+    
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2em;
+    }
+
+    footer {
+      font-size: 0.9em;
+      padding: 2em;
+      text-align: center;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkle-container"></div>
+
+  <div class="foreground-animation"></div>
+
+  <header>
+    <h1>Aklavya's Kitchen</h1>
+    <nav>
+      <a href="#menu"><i class="fas fa-utensils"></i> Menu</a>
+      <a href="#offers"><i class="fas fa-percent"></i> Offers</a>
+      <a href="#team"><i class="fas fa-users"></i> Team</a>
+      <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+      <a href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
+      <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+    <button id="themeToggle">Toggle Theme</button>
+  </header>
+
+  <section class="hero">
+    <h2>Taste the Tradition, Love the Flavor</h2>
+    <p>A culinary journey where classic recipes meet modern excellence. Discover a new world of taste.</p>
+  </section>
+
+  <section id="menu">
+    <h2 class="section-title">Our Menu</h2>
+    <div class="menu-categories"></div>
+  </section>
+  
+  <section id="offers">
+    <h2 class="section-title">Discounts and Offers</h2>
+    <div class="offer-grid">
+      <div class="offer-card">
+        <div class="offer-card-details">
+          <h3>30% Off on Weekdays</h3>
+          <p>Enjoy a 30% discount on your total bill from Monday to Thursday. Valid for dine-in only.</p>
+          <button>Claim Offer</button>
+        </div>
+      </div>
+      <div class="offer-card">
+        <div class="offer-card-details">
+          <h3>Family Combo Deal</h3>
+          <p>Get a special family meal combo for just ₹999. Includes a variety of our best dishes.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+      <div class="offer-card">
+        <div class="offer-card-details">
+          <h3>Free Dessert</h3>
+          <p>Order any two main courses and get a complimentary dessert of your choice.</p>
+          <button>Claim Offer</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <h2 class="section-title">Meet Our Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="https://i.postimg.cc/yNVkbBXF/0b976f0a7aa1aa43870e1812eee5a55d.jpg" alt="Profile picture of Aklavya">
+        <div class="team-member-details">
+          <h3>Aklavya</h3>
+          <p>Head Chef & Founder</p>
+        </div>
+      </div>
+      <div class="team-member">
+        <img src="https://i.postimg.cc/Y90jt3P0/image.png" alt="Profile picture of Ashish">
+        <div class="team-member-details">
+          <h3>Ashish</h3>
+          <p>Sous Chef</p>
+        </div>
+      </div>
+      <div class="team-member">
+        <img src="https://i.postimg.cc/Bb16Kv4G/3bdea5f546bb0eae992501ddbbb71394.jpg" alt="Profile picture of Ishesh">
+        <div class="team-member-details">
+          <h3>Ishesh</h3>
+          <p>Restaurant Manager</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title">About Us</h2>
+    <p>
+      Aklavya's Kitchen is more than just a restaurant; it's a celebration of culinary heritage and innovation. Founded by Head Chef Aklavya Sharma, our establishment is built on the philosophy of blending traditional Indian recipes with modern gastronomic techniques. We believe that food is not just sustenance but an art form that tells a story.
+    </p>
+    <p>
+      Our journey began with a simple idea: to bring the authentic flavors of India to the forefront, while also exploring new and exciting fusions. Every dish on our menu is a testament to this commitment, meticulously prepared with locally-sourced, fresh ingredients. From the fiery spices of the North to the subtle, fragrant curries of the South, our menu is a passport to a diverse and delicious world.
+    </p>
+  </section>
+
+  <section id="contact">
+    <div class="contact-info">
+      <h2 class="section-title">Contact Us</h2>
+      <div class="contact-details">
+          <div><i class="fas fa-map-marker-alt"></i> Saharanpur Chawk, Dehradun, Uttarakhand 248001</div>
+          <div><i class="fas fa-phone"></i> +91 7464870444</div>
+          <div><i class="fas fa-envelope"></i> <a href="mailto:devz.webs@gmail.com">devz.webs@gmail.com</a></div>
+          <div><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/devxpertz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">@devxpertz</a></div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h2 class="section-title">Get in Touch</h2>
+      <form action="#" method="post">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Aklavya's Kitchen. All rights reserved.
+  </footer>
+  
+  <div class="floating-cart-btn">
+    <i class="fas fa-shopping-cart"></i>
+  </div>
+
+  <script>
+    const menuItems = {
+      Breakfast: [
+        { name: "Masala Dosa", image: "https://i.postimg.cc/Nfff1bD0/masala-dosa.jpg" },
+        { name: "Poha", image: "https://i.postimg.cc/W3MxKLNP/poha.jpg" },
+        { name: "Upma", image: "https://i.postimg.cc/qMZD1Ms3/upma.jpg" },
+        { name: "Paratha", image: "https://i.postimg.cc/j5bJKPbJ/paratha.jpg" },
+        { name: "Idli", image: "https://i.postimg.cc/7ZJC2mP2/idli.jpg" },
+        { name: "Aloo Puri", image: "https://i.postimg.cc/yNqDXcWr/aloo-puri.jpg" },
+        { name: "Pancakes", image: "https://i.postimg.cc/d08LW3yQ/pancakes.jpg" },
+        { name: "Oats Bowl", image: "https://i.postimg.cc/Y9MjT766/oats-bowl.jpg" },
+        { name: "Bread Omelette", image: "https://i.postimg.cc/qRwgTFw9/bread-omelette.jpg" },
+      ],
+      Lunch: [
+        { name: "Thali", image: "https://i.postimg.cc/VvNvLFH5/thali.jpg" },
+        { name: "Paneer Butter Masala", image: "https://i.postimg.cc/SRtsXzwd/paneer-butter-masala.jpg" },
+        { name: "Veg Biryani", image: "https://i.postimg.cc/c1D6kVr3/veg-biryani.jpg" },
+        { name: "Dal Makhani", image: "https://i.postimg.cc/PrPJg2wR/dal-makhani.jpg" },
+        { name: "Rajma Chawal", image: "https://i.postimg.cc/BQkb4H5Q/rajma-chawal.jpg" },
+        { name: "Mixed Veg", image: "https://i.postimg.cc/SsfYKRS1/mixed-veg.jpg" },
+        { name: "Naan Combo", image: "https://i.postimg.cc/52z00yp5/naan-combo.jpg" },
+        { name: "Tandoori Platter", image: "https://i.postimg.cc/3wHwDhbs/tandoori-platter.jpg" },
+        { name: "Chole Bhature", image: "https://i.postimg.cc/CKHxG23z/chole-bhature.jpg" },
+      ],
+      Dinner: [
+        { name: "Kadhi Chawal", image: "https://i.postimg.cc/TwdYC9xQ/kadhi-chawal.jpg" },
+        { name: "Palak Paneer", image: "https://i.postimg.cc/wvwxPmTz/palak-paneer.jpg" },
+        { name: "Aloo Gobi", image: "https://i.postimg.cc/2yJkjNZX/aloo-gobi.jpg" },
+        { name: "Stuffed Capsicum", image: "https://i.postimg.cc/Kj4cy8RM/stuffed-capsicum.jpg" },
+        { name: "Veg Kofta", image: "https://i.postimg.cc/ryYFNxPC/veg-kofta.jpg" },
+        { name: "Matar Paneer", image: "https://i.postimg.cc/X7GNHXMM/matar-paneer.jpg" },
+        { name: "Malai Kofta", image: "https://i.postimg.cc/jSyxT9dZ/malai-kofta.jpg" },
+        { name: "Veg Noodles", image: "https://i.postimg.cc/HsqYfHHr/veg-noodles.jpg" },
+        { name: "Butter Roti", image: "https://i.postimg.cc/HLHpk2rH/butter-roti.jpg" },
+      ],
+      Cakes: [ // Assuming this section should be "Snacks" based on the items
+        { name: "Samosa", image: "https://i.postimg.cc/25wCbZWW/samosa.jpg" },
+        { name: "Kachori", image: "https://i.postimg.cc/mDgBQg35/kachori.jpg" },
+        { name: "Pakora", image: "https://i.postimg.cc/63bwzxY5/pakora.jpg" },
+        { name: "Sandwich", image: "https://i.postimg.cc/2yqYK9Kd/sandwich.jpg" },
+        { name: "Vada Pav", image: "https://i.postimg.cc/PJfpvHNX/vada-pav.jpg" },
+        { name: "Bhel Puri", image: "https://i.postimg.cc/GtMBkfsk/bhel-puri.jpg" },
+        { name: "Momos", image: "https://i.postimg.cc/NGbrqKP5/momos.jpg" },
+        { name: "Nachos", image: "https://i.postimg.cc/7Y6JxqpX/nachos.jpg" },
+        { name: "French Fries", image: "https://i.postimg.cc/yYbgxwKK/french-fries.jpg" },
+      ],
+      Indian: [
+        { name: "Rogan Josh", image: "https://i.postimg.cc/GtMBkfsk/rogan-josh.jpg" },
+        { name: "Butter Chicken", image: "https://i.postimg.cc/NGbrqKP5/butter-chicken.jpg" },
+        { name: "Korma", image: "https://i.postimg.cc/7Y6JxqpX/korma.jpg" },
+        { name: "Dhokla", image: "https://i.postimg.cc/yYbgxwKK/dhokla.jpg" },
+        { name: "Hyderabadi Biryani", image: "https://i.postimg.cc/Nfff1bD0/hyderabadi-biryani.jpg" },
+        { name: "Fish Curry", image: "https://i.postimg.cc/W3MxKLNP/fish-curry.jpg" },
+        { name: "Tandoori Chicken", image: "https://i.postimg.cc/qMZD1Ms3/tandoori-chicken.jpg" },
+        { name: "Bhindi Masala", image: "https://i.postimg.cc/j5bJKPbJ/bhindi-masala.jpg" },
+        { name: "Paneer Tikka", image: "https://i.postimg.cc/7ZJC2mP2/paneer-tikka.jpg" },
+      ],
+      Chinese: [
+        { name: "Manchurian", image: "https://i.postimg.cc/VvNvLFH5/manchurian.jpg" },
+        { name: "Hakka Noodles", image: "https://i.postimg.cc/SRtsXzwd/hakka-noodles.jpg" },
+        { name: "Spring Rolls", image: "https://i.postimg.cc/c1D6kVr3/spring-rolls.jpg" },
+        { name: "Chow Mein", image: "https://i.postimg.cc/PrPJg2wR/chow-mein.jpg" },
+        { name: "Sweet & Sour Tofu", image: "https://i.postimg.cc/BQkb4H5Q/sweet-sour-tofu.jpg" },
+        { name: "Dim Sum", image: "https://i.postimg.cc/SsfYKRS1/dim-sum.jpg" },
+        { name: "Kung Pao Veg", image: "https://i.postimg.cc/52z00yp5/kung-pao-veg.jpg" },
+        { name: "Fried Wontons", image: "https://i.postimg.cc/3wHwDhbs/fried-wontons.jpg" },
+        { name: "Schezwan Rice", image: "https://i.postimg.cc/CKHxG23z/schezwan-rice.jpg" },
+      ],
+    };
+    const menuContainer = document.querySelector(".menu-categories");
+    let cart = [];
+
+    Object.keys(menuItems).forEach(category => {
+      const section = document.createElement("div");
+      section.innerHTML = `
+        <h3 class="section-title">${category}</h3>
+        <div class="menu-grid">
+          ${menuItems[category].map(item => `
+            <div class="menu-item">
+              <img src="${item.image}" alt="Image of ${item.name}">
+              <div class="menu-item-details">
+                <h3>${item.name}</h3>
+                <p>₹${Math.floor(Math.random() * (400 - 100 + 1) + 100)}</p>
+                <button class="add-to-cart-btn" data-name="${item.name}" data-price="${Math.floor(Math.random() * (400 - 100 + 1) + 100)}">Add to Cart</button>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+      menuContainer.appendChild(section);
+    });
+
+    const lightImages = [
+      'https://i.postimg.cc/wxG1vXqs/ice-cream.png',
+      'https://i.postimg.cc/90rzbMpM/ice-cream-1.png',
+      'https://i.postimg.cc/J0v02L6Q/noodles-1.png'
+    ];
+    const darkImages = [
+      'https://i.postimg.cc/wxG1vXqs/ice-cream.png',
+      'https://i.postimg.cc/RVJNnWhp/hamburger.png',
+      'https://i.postimg.cc/XYMXKnyj/noodles.png'
+    ];
+
+    const foregroundAnimation = document.querySelector('.foreground-animation');
+    const MAX_FLOATING_IMAGES = 3;
+
+    function createFloatingImage() {
+      if (foregroundAnimation.children.length >= MAX_FLOATING_IMAGES) {
+        return;
+      }
+      
+      const img = document.createElement('img');
+      img.className = 'floating-image';
+      img.alt = 'Floating food icon';
+      
+      const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+      const images = theme === 'dark' ? darkImages : lightImages;
+      const randomImageSrc = images[Math.floor(Math.random() * images.length)];
+      img.src = randomImageSrc;
+      
+      const startSide = Math.floor(Math.random() * 4); // 0: top, 1: right, 2: bottom, 3: left
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      
+      let startX, startY, endX, endY;
+      let rotation = Math.random() * 360;
+      let duration = Math.random() * 8 + 8; // 8 to 16 seconds
+
+      switch (startSide) {
+        case 0: // From top
+          startX = Math.random() * vw;
+          startY = -100;
+          endX = Math.random() * vw;
+          endY = vh + 100;
+          break;
+        case 1: // From right
+          startX = vw + 100;
+          startY = Math.random() * vh;
+          endX = -100;
+          endY = Math.random() * vh;
+          break;
+        case 2: // From bottom
+          startX = Math.random() * vw;
+          startY = vh + 100;
+          endX = Math.random() * vw;
+          endY = -100;
+          break;
+        case 3: // From left
+          startX = -100;
+          startY = Math.random() * vh;
+          endX = vw + 100;
+          endY = Math.random() * vh;
+          break;
+      }
+
+      img.style.left = `${startX}px`;
+      img.style.top = `${startY}px`;
+      img.style.transitionDuration = `${duration}s`;
+      img.style.transform = `rotate(${rotation}deg) scale(0.8)`;
+
+      foregroundAnimation.appendChild(img);
+
+      // Animate it
+      setTimeout(() => {
+        img.style.transform = `translate(${endX - startX}px, ${endY - startY}px) rotate(${rotation + 360}deg) scale(1.2)`;
+        img.style.opacity = 0;
+      }, 50);
+
+      // Remove element after it leaves the viewport
+      setTimeout(() => {
+        img.remove();
+      }, (duration * 1000) + 100);
+    }
+    
+    // Create new floating images every 2.5 seconds
+    setInterval(createFloatingImage, 2500);
+
+    const themeToggle = document.getElementById("themeToggle");
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      const isDarkMode = document.body.classList.contains('dark-mode');
+      const currentImages = isDarkMode ? darkImages : lightImages;
+
+      document.querySelectorAll('.floating-image').forEach(img => {
+        const randomImageSrc = currentImages[Math.floor(Math.random() * currentImages.length)];
+        img.src = randomImageSrc;
+      });
+    });
+    
+    // Animate sections on scroll
+    const animateOnScroll = (elements, delayIncrement = 150) => {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }, index * delayIncrement);
+          }
+        });
+      }, {
+        threshold: 0.2
+      });
+
+      elements.forEach(element => observer.observe(element));
+    };
+
+    const menuItemsElements = document.querySelectorAll('.menu-item');
+    animateOnScroll(menuItemsElements);
+    
+    const offerCards = document.querySelectorAll('.offer-card');
+    animateOnScroll(offerCards);
+
+    const teamMembers = document.querySelectorAll('.team-member');
+    animateOnScroll(teamMembers);
+
+    // Cursor sparkle effect
+    const sparkleContainer = document.querySelector('.sparkle-container');
+    const sparkleCount = 1;
+    const maxSparkles = 50;
+
+    document.addEventListener('mousemove', (e) => {
+      if (sparkleContainer.children.length > maxSparkles) {
+        sparkleContainer.removeChild(sparkleContainer.firstChild);
+      }
+
+      for (let i = 0; i < sparkleCount; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = `${e.clientX + Math.random() * 20 - 10}px`;
+        sparkle.style.top = `${e.clientY + Math.random() * 20 - 10}px`;
+        sparkleContainer.appendChild(sparkle);
+      }
+    });
+
+    // Add to cart functionality
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('add-to-cart-btn')) {
+        const itemName = e.target.getAttribute('data-name');
+        const itemPrice = e.target.getAttribute('data-price');
+        cart.push({ name: itemName, price: itemPrice });
+        console.log(`${itemName} added to cart! Current cart:`, cart);
+      }
+    });
+  </script>
+</body>
+</html>
