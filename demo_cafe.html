@@ -16,6 +16,7 @@
       --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.1);
       --transition: all 0.3s ease-in-out;
       --sparkle-color: #ffcc00;
+      --nav-bg-color: rgba(255, 255, 255, 0.9);
     }
 
     body.dark-mode {
@@ -25,6 +26,7 @@
       --text-light: #ecf0f1;
       --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.4);
       --sparkle-color: #fff899;
+      --nav-bg-color: rgba(52, 73, 94, 0.9);
     }
 
     * {
@@ -115,22 +117,23 @@
 
     /* Floating cart button style */
     .floating-cart-btn {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        background-color: var(--accent-color);
-        color: var(--secondary-color);
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        cursor: pointer;
-        z-index: 1000;
-        font-size: 1.5em;
-        animation: pulse 2s infinite;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--accent-color);
+      color: var(--secondary-color);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      z-index: 1000;
+      font-size: 1.5em;
+      animation: pulse 2s infinite;
+      border: none;
     }
 
     @keyframes pulse {
@@ -139,12 +142,13 @@
       100% { transform: scale(1); }
     }
 
+    /* Header & Navigation */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1.5em 3em;
-      background: var(--secondary-color);
+      background: var(--nav-bg-color);
       box-shadow: var(--shadow-light);
       position: sticky;
       top: 0;
@@ -166,7 +170,11 @@
       cursor: pointer;
     }
 
-    nav a {
+    .nav-links {
+      display: flex;
+    }
+
+    .nav-links a {
       color: var(--text-light);
       text-decoration: none;
       margin: 0 1em;
@@ -174,7 +182,7 @@
       position: relative;
     }
 
-    nav a::after {
+    .nav-links a::after {
       content: '';
       position: absolute;
       width: 0;
@@ -186,7 +194,7 @@
       transition: width 0.4s ease;
     }
 
-    nav a:hover::after {
+    .nav-links a:hover::after {
       width: 100%;
       left: 0;
       background: var(--accent-color);
@@ -208,6 +216,17 @@
       color: var(--accent-color);
     }
 
+    .hamburger-menu {
+      display: none; /* Hidden on larger screens */
+      background: none;
+      border: none;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: var(--text-light);
+      z-index: 101;
+    }
+    
+    /* Hero Section */
     .hero {
       height: 70vh;
       display: flex;
@@ -250,6 +269,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Content Sections */
     section {
       padding: 4em 2em;
       max-width: 1200px;
@@ -268,7 +288,7 @@
       transform: translateY(-2px);
     }
 
-    .menu-grid, .team-grid {
+    .menu-grid, .team-grid, .offer-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2em;
@@ -388,6 +408,7 @@
       box-shadow: var(--shadow-light);
     }
 
+    /* Contact Section */
     #contact {
       display: flex;
       justify-content: space-around;
@@ -401,7 +422,7 @@
     }
 
     .contact-info {
-        text-align: left;
+      text-align: left;
     }
     
     .contact-info h2 {
@@ -409,57 +430,57 @@
     }
     
     .contact-details {
-        margin-top: 2em;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5em;
-        font-size: 1.1em;
+      margin-top: 2em;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5em;
+      font-size: 1.1em;
     }
 
     .contact-details div {
-        display: flex;
-        align-items: center;
-        gap: 1em;
+      display: flex;
+      align-items: center;
+      gap: 1em;
     }
     
     .contact-details i {
-        color: var(--accent-color);
-        font-size: 1.5em;
+      color: var(--accent-color);
+      font-size: 1.5em;
     }
 
     .contact-form form {
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
     }
 
     .contact-form input, .contact-form textarea {
-        padding: 1em;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background: var(--primary-color);
-        color: var(--text-light);
-        font-family: 'Raleway', sans-serif;
+      padding: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: var(--primary-color);
+      color: var(--text-light);
+      font-family: 'Raleway', sans-serif;
     }
     
     .contact-form textarea {
-        resize: vertical;
-        min-height: 150px;
+      resize: vertical;
+      min-height: 150px;
     }
 
     .contact-form button {
-        background-color: var(--accent-color);
-        color: white;
-        border: none;
-        padding: 1em;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: 700;
-        text-transform: uppercase;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 700;
+      text-transform: uppercase;
     }
     
     .contact-form button:hover {
-        background-color: var(--text-light);
+      background-color: var(--text-light);
     }
     
     #offers {
@@ -468,12 +489,6 @@
       gap: 2em;
     }
     
-    .offer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2em;
-    }
-
     footer {
       font-size: 0.9em;
       padding: 2em;
@@ -484,24 +499,160 @@
       color: var(--accent-color);
       text-decoration: none;
     }
+    
+    /* Mobile-first Media Queries */
+    /* Small screens (e.g., phones) */
+    @media (max-width: 575px) {
+      header {
+        justify-content: space-between;
+        padding: 1em;
+      }
+      header h1 {
+        font-size: 1.5em;
+      }
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Start off-screen */
+        width: 70%;
+        height: 100vh;
+        background: var(--secondary-color);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2em;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        z-index: 99;
+        transition: right 0.5s ease;
+      }
+      .nav-links.open {
+        right: 0;
+      }
+      .nav-links a {
+        margin: 1em 0;
+        text-align: center;
+        font-size: 1.2em;
+        width: 100%;
+      }
+      #themeToggle {
+        display: none; /* Hide the theme toggle button in the mobile nav */
+      }
+      .hamburger-menu {
+        display: block; /* Show the hamburger menu button */
+        margin-right: 1em;
+      }
+      .hero {
+        height: 50vh;
+      }
+      .hero h2 {
+        font-size: 2em;
+      }
+      .hero p {
+        font-size: 0.9em;
+      }
+      section {
+        padding: 2em 1em;
+      }
+      .section-title {
+        font-size: 1.8em;
+      }
+      /* Menu grid for small phones: 2x2 */
+      .menu-grid, .offer-grid, .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1em;
+      }
+      .menu-item img, .team-member img {
+        height: 150px;
+      }
+      #contact {
+        flex-direction: column;
+      }
+      .contact-info, .contact-form {
+        width: 100%;
+      }
+      .contact-form h2 {
+        font-size: 1.8em;
+      }
+      .contact-details div {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5em;
+      }
+      .floating-cart-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2em;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+    /* Medium screens (e.g., tablets) */
+    @media (min-width: 576px) and (max-width: 991px) {
+      header {
+        padding: 1.5em 2em;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1em;
+      }
+      header h1 {
+        font-size: 1.8em;
+        flex-basis: 100%;
+        text-align: center;
+      }
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+      }
+      .hero {
+        height: 60vh;
+      }
+      .hero h2 {
+        font-size: 3em;
+      }
+      .hero p {
+        font-size: 1.1em;
+      }
+      section {
+        padding: 3em 1.5em;
+      }
+      .section-title {
+        font-size: 2.2em;
+      }
+      /* Menu grid for tablets: 3x3 */
+      .menu-grid, .offer-grid, .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5em;
+      }
+      .hamburger-menu {
+        display: none;
+      }
+    }
+    /* Large screens and above */
+    @media (min-width: 992px) {
+      .hamburger-menu {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="sparkle-container"></div>
-
   <div class="foreground-animation"></div>
 
   <header>
     <h1>Aklavya's Kitchen</h1>
-    <nav>
+    <button class="hamburger-menu" aria-label="Open menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav class="nav-links">
       <a href="#menu"><i class="fas fa-utensils"></i> Menu</a>
       <a href="#offers"><i class="fas fa-percent"></i> Offers</a>
       <a href="#team"><i class="fas fa-users"></i> Team</a>
       <a href="#about"><i class="fas fa-info-circle"></i> About</a>
-      <a href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
+      <a href="#cart" aria-label="Cart"><i class="fas fa-shopping-cart"></i> Cart</a>
       <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+      <button id="themeToggle">Toggle Theme</button>
     </nav>
-    <button id="themeToggle">Toggle Theme</button>
   </header>
 
   <section class="hero">
@@ -603,9 +754,9 @@
     &copy; 2025 Aklavya's Kitchen. All rights reserved.
   </footer>
   
-  <div class="floating-cart-btn">
+  <button class="floating-cart-btn" aria-label="Open Shopping Cart">
     <i class="fas fa-shopping-cart"></i>
-  </div>
+  </button>
 
   <script>
     const menuItems = {
@@ -642,7 +793,7 @@
         { name: "Veg Noodles", image: "https://i.postimg.cc/HsqYfHHr/veg-noodles.jpg" },
         { name: "Butter Roti", image: "https://i.postimg.cc/HLHpk2rH/butter-roti.jpg" },
       ],
-      Cakes: [ // Assuming this section should be "Snacks" based on the items
+      Snacks: [
         { name: "Samosa", image: "https://i.postimg.cc/25wCbZWW/samosa.jpg" },
         { name: "Kachori", image: "https://i.postimg.cc/mDgBQg35/kachori.jpg" },
         { name: "Pakora", image: "https://i.postimg.cc/63bwzxY5/pakora.jpg" },
@@ -840,6 +991,21 @@
         sparkle.style.top = `${e.clientY + Math.random() * 20 - 10}px`;
         sparkleContainer.appendChild(sparkle);
       }
+    });
+
+    // Hamburger menu functionality
+    const hamburgerBtn = document.querySelector('.hamburger-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburgerBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Close menu when a link is clicked (for better UX)
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
     });
 
     // Add to cart functionality
