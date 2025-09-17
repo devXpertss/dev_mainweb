@@ -847,7 +847,57 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+        
+        /* Desktop Hero Banner Slider */
+        @media (min-width: 769px) {
+            .hero-slider {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
+            
+            .hero-slide {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                opacity: 0;
+                transition: opacity 2s ease-in-out;
+            }
+            
+            .hero-slide.active {
+                opacity: 1;
+            }
+            
+            .hero-slide:nth-child(1) {
+                background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1920&h=1080&fit=crop&auto=format');
+            }
+            
+            .hero-slide:nth-child(2) {
+                background-image: url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1920&h=1080&fit=crop&auto=format');
+            }
+            
+            .hero-slide:nth-child(3) {
+                background-image: url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=1920&h=1080&fit=crop&auto=format');
+            }
+            
+            .hero-slide:nth-child(4) {
+                background-image: url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1920&h=1080&fit=crop&auto=format');
+            }
+            
+            .hero-slide:nth-child(5) {
+                background-image: url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1920&h=1080&fit=crop&auto=format');
+            }
         }
         
         .hero-content {
@@ -877,6 +927,15 @@
             flex-direction: column;
             gap: 16px;
             align-items: center;
+        }
+        
+        /* Desktop horizontal buttons */
+        @media (min-width: 769px) {
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: center;
+                gap: 24px;
+            }
         }
         
         /* Cards */
@@ -1296,7 +1355,6 @@
             }
             
             .hero-buttons {
-                flex-direction: column;
                 gap: 12px;
             }
             
@@ -1531,17 +1589,7 @@
                         <i class="fas fa-user-shield"></i>
                     </button>
                     
-                    <!-- Contact Info -->
-                    <div class="contact-info">
-                        <a href="mailto:vernikajewellers56@gmail.com">
-                            <i class="fas fa-envelope"></i>
-                            <span>vernikajewellers56@gmail.com</span>
-                        </a>
-                        <a href="https://wa.me/919034348408" style="color: #16a34a;">
-                            <i class="fab fa-whatsapp"></i>
-                            <span>+91 90343 48408</span>
-                        </a>
-                    </div>
+
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -1596,6 +1644,15 @@
         <div id="home-page" class="page">
             <!-- Hero Section -->
             <section class="hero">
+                <!-- Desktop Hero Slider -->
+                <div class="hero-slider">
+                    <div class="hero-slide active"></div>
+                    <div class="hero-slide"></div>
+                    <div class="hero-slide"></div>
+                    <div class="hero-slide"></div>
+                    <div class="hero-slide"></div>
+                </div>
+                
                 <div class="container">
                     <div class="hero-content">
                         <h1 class="font-cormorant">Exquisite Jewelry Collection</h1>
@@ -2689,6 +2746,24 @@
             }, 3000);
         }
 
+        // Hero slider functionality (desktop only)
+        function initHeroSlider() {
+            // Only run on desktop
+            if (window.innerWidth <= 768) return;
+            
+            const slides = document.querySelectorAll('.hero-slide');
+            let currentSlide = 0;
+            
+            function nextSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+            
+            // Auto-slide every 4 seconds
+            setInterval(nextSlide, 4000);
+        }
+
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
             // Load saved theme
@@ -2714,6 +2789,9 @@
             
             // Initialize rates display
             updateRatesDisplay();
+            
+            // Initialize hero slider for desktop
+            initHeroSlider();
         });
 
         // Rates are handled by Firebase listener above
@@ -2832,7 +2910,7 @@
                             </div>
                             
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color);">
-                                <span style="color: var(--text-secondary); font-size: 14px;">Making Charges (15%):</span>
+                                <span style="color: var(--text-secondary); font-size: 14px;">Making Charges:</span>
                                 <span class="making-charges" style="font-weight: 600; color: var(--text-primary); font-size: 14px;">₹0</span>
                             </div>
                             
@@ -3796,5 +3874,5 @@
             });
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9806d35066127819',t:'MTc1ODA5MzQ2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9807db3ac386c9b2',t:'MTc1ODEwNDI3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
