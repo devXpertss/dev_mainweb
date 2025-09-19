@@ -23,20 +23,44 @@
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
         
+        // Test Firebase connection
+        console.log('🔥 Firebase initialized, testing connection...');
+        database.ref('.info/connected').on('value', (snapshot) => {
+            if (snapshot.val() === true) {
+                console.log('✅ Firebase connected successfully');
+            } else {
+                console.log('❌ Firebase disconnected');
+            }
+        });
+        
         // Global data objects - Initialize as empty
         window.currentRates = {};
         window.productData = {};
         window.adminCredentials = {};
         window.dataLoaded = false;
         
-        // Real-time Firebase listeners
+        // Real-time Firebase listeners with fallback
         database.ref('rates').on('value', (snapshot) => {
             if (snapshot.exists()) {
                 const data = snapshot.val();
-                const gold24k = data.gold || 0;
+                console.log('📊 Raw Firebase rates data:', data);
+                
+                // Handle different data structures
+                let gold24k, silver;
+                
+                if (typeof data === 'object' && data !== null) {
+                    // If data is an object with gold and silver properties
+                    gold24k = data.gold || data.gold24k || data['24k'] || 0;
+                    silver = data.silver || 0;
+                } else {
+                    // If data structure is different, use fallback
+                    gold24k = 7500; // Fallback rate
+                    silver = 85;    // Fallback rate
+                    console.warn('⚠️ Using fallback rates due to unexpected data structure');
+                }
+                
                 const gold22k = Math.round(gold24k * 0.916);
                 const gold18k = Math.round(gold24k * 0.75);
-                const silver = data.silver || 0;
                 
                 // Update global rates
                 window.currentRates = {
@@ -48,13 +72,29 @@
                 
                 // Update DOM elements
                 updateRatesDisplay();
-                console.log('✅ Rates loaded from Firebase:', window.currentRates);
+                console.log('✅ Rates processed and updated:', window.currentRates);
             } else {
-                console.error('❌ No rates data found in Firebase');
+                console.warn('⚠️ No rates data found in Firebase, using fallback rates');
+                // Use fallback rates
+                window.currentRates = {
+                    gold24k: 7500,
+                    gold22k: 6870,
+                    gold18k: 5625,
+                    silver: 85
+                };
+                updateRatesDisplay();
                 showFirebaseError('rates');
             }
         }, (error) => {
             console.error('❌ Firebase rates error:', error);
+            // Use fallback rates on error
+            window.currentRates = {
+                gold24k: 7500,
+                gold22k: 6870,
+                gold18k: 5625,
+                silver: 85
+            };
+            updateRatesDisplay();
             showFirebaseError('rates');
         });
         
@@ -240,20 +280,33 @@
                 return;
             }
             
-            // Update Firebase
+            console.log('🔄 Updating rates in Firebase:', { gold: goldRate, silver: silverRate });
+            
+            // Update Firebase with set method for better reliability
             const updates = {
                 gold: goldRate,
                 silver: silverRate,
-                lastUpdated: new Date().toISOString()
+                lastUpdated: new Date().toISOString(),
+                updatedBy: 'admin'
             };
             
-            database.ref('rates').update(updates)
+            database.ref('rates').set(updates)
                 .then(() => {
+                    console.log('✅ Rates updated in Firebase successfully');
                     showNotification('Rates updated successfully!', 'success');
+                    
+                    // Force update local rates immediately
+                    window.currentRates = {
+                        gold24k: goldRate,
+                        gold22k: Math.round(goldRate * 0.916),
+                        gold18k: Math.round(goldRate * 0.75),
+                        silver: silverRate
+                    };
+                    updateRatesDisplay();
                 })
                 .catch((error) => {
-                    console.error('Error updating rates:', error);
-                    showNotification('Failed to update rates!', 'error');
+                    console.error('❌ Error updating rates:', error);
+                    showNotification('Failed to update rates! Please try again.', 'error');
                 });
         }
     </script>
@@ -357,20 +410,20 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.03;
+            opacity: 0.08;
             background-image: 
-                radial-gradient(circle at 20% 80%, rgba(32, 178, 170, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(32, 178, 170, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(32, 178, 170, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(32, 178, 170, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(32, 178, 170, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(32, 178, 170, 0.2) 0%, transparent 50%);
             animation: backgroundFloat 20s ease-in-out infinite;
         }
         
         .theme-dark body::before {
-            opacity: 0.08;
+            opacity: 0.12;
             background-image: 
-                radial-gradient(circle at 20% 80%, rgba(32, 178, 170, 0.4) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(64, 224, 208, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(0, 139, 139, 0.2) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(32, 178, 170, 0.5) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(64, 224, 208, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 139, 139, 0.3) 0%, transparent 50%);
         }
         
         @keyframes backgroundFloat {
@@ -392,12 +445,12 @@
         
         .floating-shape {
             position: absolute;
-            opacity: 0.02;
+            opacity: 0.08;
             animation: float 15s infinite linear;
         }
         
         .theme-dark .floating-shape {
-            opacity: 0.05;
+            opacity: 0.12;
         }
         
         .floating-shape:nth-child(1) {
@@ -429,6 +482,57 @@
             border-radius: 20px;
             transform: rotate(45deg);
             animation-delay: -10s;
+        }
+        
+        .floating-shape:nth-child(4) {
+            top: 30%;
+            left: 70%;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--sea-green), var(--sea-green-dark));
+            border-radius: 50%;
+            animation-delay: -3s;
+        }
+        
+        .floating-shape:nth-child(5) {
+            bottom: 40%;
+            right: 30%;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, var(--sea-green-light), var(--sea-green));
+            border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+            animation-delay: -8s;
+        }
+        
+        .floating-shape:nth-child(6) {
+            top: 70%;
+            left: 5%;
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(90deg, var(--sea-green-dark), var(--sea-green-light));
+            border-radius: 20px;
+            transform: rotate(30deg);
+            animation-delay: -12s;
+        }
+        
+        .floating-shape:nth-child(7) {
+            top: 15%;
+            right: 40%;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(180deg, var(--sea-green), var(--sea-green-dark));
+            border-radius: 50% 20% 50% 20%;
+            animation-delay: -6s;
+        }
+        
+        .floating-shape:nth-child(8) {
+            bottom: 10%;
+            right: 60%;
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(270deg, var(--sea-green-light), var(--sea-green));
+            border-radius: 50%;
+            animation-delay: -15s;
         }
         
         @keyframes float {
@@ -851,52 +955,193 @@
             z-index: 2;
         }
         
-        /* Desktop Hero Banner Slider */
-        @media (min-width: 769px) {
-            .hero-slider {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: 1;
-            }
-            
-            .hero-slide {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                opacity: 0;
-                transition: opacity 2s ease-in-out;
-            }
-            
-            .hero-slide.active {
-                opacity: 1;
-            }
-            
+        /* Hero Banner Slider - All Devices */
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        /* Desktop Images - High Resolution */
+        @media (min-width: 1200px) {
             .hero-slide:nth-child(1) {
-                background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1920&h=1080&fit=crop&auto=format');
+                background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1920&h=1080&fit=crop&auto=format&q=80');
             }
             
             .hero-slide:nth-child(2) {
-                background-image: url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1920&h=1080&fit=crop&auto=format');
+                background-image: url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1920&h=1080&fit=crop&auto=format&q=80');
             }
             
             .hero-slide:nth-child(3) {
-                background-image: url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=1920&h=1080&fit=crop&auto=format');
+                background-image: url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=1920&h=1080&fit=crop&auto=format&q=80');
             }
             
             .hero-slide:nth-child(4) {
-                background-image: url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1920&h=1080&fit=crop&auto=format');
+                background-image: url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1920&h=1080&fit=crop&auto=format&q=80');
             }
             
             .hero-slide:nth-child(5) {
-                background-image: url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1920&h=1080&fit=crop&auto=format');
+                background-image: url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1920&h=1080&fit=crop&auto=format&q=80');
+            }
+            
+            .hero-slide:nth-child(6) {
+                background-image: url('https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=1920&h=1080&fit=crop&auto=format&q=80');
+            }
+            
+            .hero-slide:nth-child(7) {
+                background-image: url('https://images.unsplash.com/photo-1544376664-80b17f09d399?w=1920&h=1080&fit=crop&auto=format&q=80');
+            }
+            
+            .hero-slide:nth-child(8) {
+                background-image: url('https://images.unsplash.com/photo-1603561596112-db1d4e7c3e1b?w=1920&h=1080&fit=crop&auto=format&q=80');
+            }
+        }
+        
+        /* Tablet Images - Medium Resolution */
+        @media (min-width: 769px) and (max-width: 1199px) {
+            .hero-slide:nth-child(1) {
+                background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1200&h=800&fit=crop&auto=format&q=75');
+            }
+            
+            .hero-slide:nth-child(2) {
+                background-image: url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200&h=800&fit=crop&auto=format&q=75');
+            }
+            
+            .hero-slide:nth-child(3) {
+                background-image: url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=1200&h=800&fit=crop&auto=format&q=75');
+            }
+            
+            .hero-slide:nth-child(4) {
+                background-image: url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1200&h=800&fit=crop&auto=format&q=75');
+            }
+            
+            .hero-slide:nth-child(5) {
+                background-image: url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1200&h=800&fit=crop&auto=format&q=75');
+            }
+            
+            .hero-slide:nth-child(6) {
+                background-image: url('https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=1200&h=800&fit=crop&auto=format&q=75');
+            }
+            
+            .hero-slide:nth-child(7) {
+                background-image: url('https://images.unsplash.com/photo-1544376664-80b17f09d399?w=1200&h=800&fit=crop&auto=format&q=75');
+            }
+            
+            .hero-slide:nth-child(8) {
+                background-image: url('https://images.unsplash.com/photo-1603561596112-db1d4e7c3e1b?w=1200&h=800&fit=crop&auto=format&q=75');
+            }
+        }
+        
+        /* Mobile Images - Optimized for small screens */
+        @media (max-width: 768px) {
+            .hero-slide:nth-child(1) {
+                background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=900&h=700&fit=crop&auto=format&q=70');
+                background-size: cover;
+                background-position: center center;
+            }
+            
+            .hero-slide:nth-child(2) {
+                background-image: url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&h=700&fit=crop&auto=format&q=70');
+                background-size: cover;
+                background-position: center center;
+            }
+            
+            .hero-slide:nth-child(3) {
+                background-image: url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=900&h=700&fit=crop&auto=format&q=70');
+                background-size: cover;
+                background-position: center center;
+            }
+            
+            .hero-slide:nth-child(4) {
+                background-image: url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=900&h=700&fit=crop&auto=format&q=70');
+                background-size: cover;
+                background-position: center center;
+            }
+            
+            .hero-slide:nth-child(5) {
+                background-image: url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=900&h=700&fit=crop&auto=format&q=70');
+                background-size: cover;
+                background-position: center center;
+            }
+            
+            .hero-slide:nth-child(6) {
+                background-image: url('https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=900&h=700&fit=crop&auto=format&q=70');
+                background-size: cover;
+                background-position: center center;
+            }
+            
+            .hero-slide:nth-child(7) {
+                background-image: url('https://images.unsplash.com/photo-1544376664-80b17f09d399?w=900&h=700&fit=crop&auto=format&q=70');
+                background-size: cover;
+                background-position: center center;
+            }
+            
+            .hero-slide:nth-child(8) {
+                background-image: url('https://images.unsplash.com/photo-1603561596112-db1d4e7c3e1b?w=900&h=700&fit=crop&auto=format&q=70');
+                background-size: cover;
+                background-position: center center;
+            }
+        }
+        
+        /* Extra small mobile devices */
+        @media (max-width: 480px) {
+            .hero-slide {
+                background-size: cover !important;
+                background-position: center center !important;
+                min-height: 100%;
+            }
+            
+            .hero-slide:nth-child(1) {
+                background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&h=500&fit=crop&auto=format&q=65');
+            }
+            
+            .hero-slide:nth-child(2) {
+                background-image: url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=500&fit=crop&auto=format&q=65');
+            }
+            
+            .hero-slide:nth-child(3) {
+                background-image: url('https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600&h=500&fit=crop&auto=format&q=65');
+            }
+            
+            .hero-slide:nth-child(4) {
+                background-image: url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&h=500&fit=crop&auto=format&q=65');
+            }
+            
+            .hero-slide:nth-child(5) {
+                background-image: url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&h=500&fit=crop&auto=format&q=65');
+            }
+            
+            .hero-slide:nth-child(6) {
+                background-image: url('https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=600&h=500&fit=crop&auto=format&q=65');
+            }
+            
+            .hero-slide:nth-child(7) {
+                background-image: url('https://images.unsplash.com/photo-1544376664-80b17f09d399?w=600&h=500&fit=crop&auto=format&q=65');
+            }
+            
+            .hero-slide:nth-child(8) {
+                background-image: url('https://images.unsplash.com/photo-1603561596112-db1d4e7c3e1b?w=600&h=500&fit=crop&auto=format&q=65');
             }
         }
         
@@ -1170,6 +1415,20 @@
             }
         }
         
+        /* Product grid - Always 3 columns on desktop and larger screens */
+        #products-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 24px !important;
+        }
+        
+        @media (max-width: 1200px) {
+            /* Product grid for tablets - still 3 columns */
+            #products-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 20px !important;
+            }
+        }
+        
         @media (max-width: 992px) {
             .header-content {
                 min-height: 65px;
@@ -1340,6 +1599,12 @@
                 gap: 16px;
             }
             
+            /* Product grid responsive - 3 columns on mobile too */
+            #products-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 12px !important;
+            }
+            
             .hero {
                 padding: 60px 0;
             }
@@ -1466,7 +1731,7 @@
             }
             
             .product-card img {
-                height: 160px;
+                height: 220px !important;
             }
         }
         
@@ -1514,6 +1779,11 @@
 <body class="font-inter theme-light transition-all duration-300" style="background-color: var(--bg-secondary); color: var(--text-primary);">
     <!-- Floating Background Shapes -->
     <div class="floating-shapes">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
         <div class="floating-shape"></div>
         <div class="floating-shape"></div>
         <div class="floating-shape"></div>
@@ -1644,9 +1914,12 @@
         <div id="home-page" class="page">
             <!-- Hero Section -->
             <section class="hero">
-                <!-- Desktop Hero Slider -->
+                <!-- Hero Slider - All Devices -->
                 <div class="hero-slider">
                     <div class="hero-slide active"></div>
+                    <div class="hero-slide"></div>
+                    <div class="hero-slide"></div>
+                    <div class="hero-slide"></div>
                     <div class="hero-slide"></div>
                     <div class="hero-slide"></div>
                     <div class="hero-slide"></div>
@@ -1670,9 +1943,16 @@
             </section>
 
             <!-- Featured Categories -->
-            <section class="section" style="background-color: var(--bg-primary);">
-                <div class="container">
-                    <h2 class="text-center font-cormorant sea-text mb-16">Featured Categories</h2>
+            <section class="section" style="background-color: var(--bg-primary); position: relative; overflow: hidden;">
+                <!-- Decorative Pattern -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.02; background-image: radial-gradient(circle at 25% 25%, var(--sea-green) 2px, transparent 2px), radial-gradient(circle at 75% 75%, var(--sea-green-light) 1px, transparent 1px); background-size: 50px 50px; background-position: 0 0, 25px 25px; pointer-events: none;"></div>
+                
+                <div class="container" style="position: relative; z-index: 2;">
+                    <h2 class="text-center font-cormorant sea-text mb-16" style="position: relative;">
+                        Featured Categories
+                        <div style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: linear-gradient(90deg, transparent, var(--sea-green), transparent); border-radius: 2px;"></div>
+                        <div style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); width: 100px; height: 2px; background: linear-gradient(90deg, transparent, var(--sea-green-light), transparent); border-radius: 1px;"></div>
+                    </h2>
                     <div class="grid grid-4">
                         <div class="category-card luxury-card" onclick="showSubcategory('gold', 'chains')">
                             <div class="category-icon">
@@ -1707,9 +1987,20 @@
             </section>
 
             <!-- Live Rates Display -->
-            <section class="section" style="background-color: var(--bg-secondary);">
-                <div class="container">
-                    <h2 class="text-center font-cormorant sea-text mb-16">Today's Live Rates</h2>
+            <section class="section" style="background-color: var(--bg-secondary); position: relative; overflow: hidden;">
+                <!-- Decorative Background -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.03; background: linear-gradient(45deg, transparent 30%, var(--sea-green) 30%, var(--sea-green) 32%, transparent 32%, transparent 68%, var(--sea-green-light) 68%, var(--sea-green-light) 70%, transparent 70%); background-size: 100px 100px; pointer-events: none;"></div>
+                
+                <div class="container" style="position: relative; z-index: 2;">
+                    <h2 class="text-center font-cormorant sea-text mb-16" style="position: relative;">
+                        Today's Live Rates
+                        <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background: linear-gradient(90deg, var(--sea-green), var(--sea-green-light), var(--sea-green)); border-radius: 2px;"></div>
+                        <div style="position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); display: flex; gap: 4px;">
+                            <div style="width: 8px; height: 8px; background: var(--sea-green); border-radius: 50%;"></div>
+                            <div style="width: 6px; height: 6px; background: var(--sea-green-light); border-radius: 50%; margin-top: 1px;"></div>
+                            <div style="width: 8px; height: 8px; background: var(--sea-green); border-radius: 50%;"></div>
+                        </div>
+                    </h2>
                     <div class="grid grid-4">
                         <div class="rate-card luxury-card">
                             <div class="rate-icon">
@@ -1748,9 +2039,35 @@
             </section>
 
             <!-- Testimonials Section -->
-            <section class="section" style="background-color: var(--bg-primary);">
-                <div class="container">
-                    <h2 class="text-center font-cormorant sea-text mb-16">What Our Customers Say</h2>
+            <section class="section" style="background-color: var(--bg-primary); position: relative; overflow: hidden;">
+                <!-- Decorative Quote Marks -->
+                <div style="position: absolute; top: 10%; left: 5%; font-size: 120px; color: var(--sea-green); opacity: 0.05; font-family: serif; pointer-events: none;">"</div>
+                <div style="position: absolute; bottom: 10%; right: 5%; font-size: 120px; color: var(--sea-green-light); opacity: 0.05; font-family: serif; transform: rotate(180deg); pointer-events: none;">"</div>
+                
+                <!-- Decorative Stars -->
+                <div style="position: absolute; top: 20%; right: 15%; color: var(--sea-green); opacity: 0.1; pointer-events: none;">
+                    <i class="fas fa-star" style="font-size: 24px; margin: 2px;"></i>
+                    <i class="fas fa-star" style="font-size: 18px; margin: 2px;"></i>
+                    <i class="fas fa-star" style="font-size: 20px; margin: 2px;"></i>
+                </div>
+                <div style="position: absolute; bottom: 30%; left: 10%; color: var(--sea-green-light); opacity: 0.08; pointer-events: none;">
+                    <i class="fas fa-star" style="font-size: 16px; margin: 2px;"></i>
+                    <i class="fas fa-star" style="font-size: 22px; margin: 2px;"></i>
+                    <i class="fas fa-star" style="font-size: 14px; margin: 2px;"></i>
+                    <i class="fas fa-star" style="font-size: 18px; margin: 2px;"></i>
+                </div>
+                
+                <div class="container" style="position: relative; z-index: 2;">
+                    <h2 class="text-center font-cormorant sea-text mb-16" style="position: relative;">
+                        What Our Customers Say
+                        <div style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px;">
+                            <div style="width: 4px; height: 4px; background: var(--sea-green); border-radius: 50%;"></div>
+                            <div style="width: 6px; height: 6px; background: var(--sea-green-light); border-radius: 50%;"></div>
+                            <div style="width: 8px; height: 8px; background: var(--sea-green); border-radius: 50%;"></div>
+                            <div style="width: 6px; height: 6px; background: var(--sea-green-light); border-radius: 50%;"></div>
+                            <div style="width: 4px; height: 4px; background: var(--sea-green); border-radius: 50%;"></div>
+                        </div>
+                    </h2>
                     <div class="grid grid-3">
                         <div class="luxury-card text-center">
                             <div style="margin-bottom: 20px;">
@@ -1808,9 +2125,38 @@
             </section>
 
             <!-- Services Section -->
-            <section class="section" style="background-color: var(--bg-secondary);">
-                <div class="container">
-                    <h2 class="text-center font-cormorant sea-text mb-16">Our Services</h2>
+            <section class="section" style="background-color: var(--bg-secondary); position: relative; overflow: hidden;">
+                <!-- Decorative Geometric Pattern -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.02; background-image: 
+                    linear-gradient(30deg, var(--sea-green) 12%, transparent 12.5%, transparent 87%, var(--sea-green) 87.5%, var(--sea-green)),
+                    linear-gradient(150deg, var(--sea-green-light) 12%, transparent 12.5%, transparent 87%, var(--sea-green-light) 87.5%, var(--sea-green-light)),
+                    linear-gradient(30deg, transparent 37%, var(--sea-green) 37.5%, var(--sea-green) 62%, transparent 62.5%, transparent),
+                    linear-gradient(150deg, transparent 37%, var(--sea-green-light) 37.5%, var(--sea-green-light) 62%, transparent 62.5%, transparent);
+                    background-size: 80px 140px; pointer-events: none;"></div>
+                
+                <!-- Service Icons Background -->
+                <div style="position: absolute; top: 15%; right: 8%; color: var(--sea-green); opacity: 0.04; pointer-events: none;">
+                    <i class="fas fa-certificate" style="font-size: 60px;"></i>
+                </div>
+                <div style="position: absolute; bottom: 20%; left: 12%; color: var(--sea-green-light); opacity: 0.04; pointer-events: none;">
+                    <i class="fas fa-tools" style="font-size: 50px;"></i>
+                </div>
+                <div style="position: absolute; top: 40%; left: 85%; color: var(--sea-green); opacity: 0.03; pointer-events: none;">
+                    <i class="fas fa-exchange-alt" style="font-size: 45px;"></i>
+                </div>
+                
+                <div class="container" style="position: relative; z-index: 2;">
+                    <h2 class="text-center font-cormorant sea-text mb-16" style="position: relative;">
+                        Our Services
+                        <div style="position: absolute; top: -18px; left: 50%; transform: translateX(-50%); width: 120px; height: 2px; background: linear-gradient(90deg, transparent, var(--sea-green), var(--sea-green-light), var(--sea-green), transparent); border-radius: 1px;"></div>
+                        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); display: flex; gap: 3px;">
+                            <div style="width: 12px; height: 2px; background: var(--sea-green); border-radius: 1px;"></div>
+                            <div style="width: 8px; height: 2px; background: var(--sea-green-light); border-radius: 1px;"></div>
+                            <div style="width: 16px; height: 2px; background: var(--sea-green); border-radius: 1px;"></div>
+                            <div style="width: 8px; height: 2px; background: var(--sea-green-light); border-radius: 1px;"></div>
+                            <div style="width: 12px; height: 2px; background: var(--sea-green); border-radius: 1px;"></div>
+                        </div>
+                    </h2>
                     <div class="grid grid-4">
                         <div class="luxury-card text-center">
                             <div style="width: 80px; height: 80px; background: var(--sea-green); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
@@ -1845,9 +2191,26 @@
             </section>
 
             <!-- FAQ Section -->
-            <section class="section" style="background-color: var(--bg-primary);">
-                <div class="container">
-                    <h2 class="text-center font-cormorant sea-text mb-16">Frequently Asked Questions</h2>
+            <section class="section" style="background-color: var(--bg-primary); position: relative; overflow: hidden;">
+                <!-- Decorative Question Marks -->
+                <div style="position: absolute; top: 8%; left: 3%; font-size: 100px; color: var(--sea-green); opacity: 0.03; font-weight: bold; pointer-events: none;">?</div>
+                <div style="position: absolute; bottom: 12%; right: 8%; font-size: 80px; color: var(--sea-green-light); opacity: 0.04; font-weight: bold; pointer-events: none;">?</div>
+                <div style="position: absolute; top: 50%; right: 2%; font-size: 60px; color: var(--sea-green); opacity: 0.02; font-weight: bold; pointer-events: none;">?</div>
+                
+                <!-- Decorative Dots Pattern -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.015; background-image: radial-gradient(circle, var(--sea-green) 1px, transparent 1px); background-size: 30px 30px; pointer-events: none;"></div>
+                
+                <div class="container" style="position: relative; z-index: 2;">
+                    <h2 class="text-center font-cormorant sea-text mb-16" style="position: relative;">
+                        Frequently Asked Questions
+                        <div style="position: absolute; top: -22px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 8px;">
+                            <div style="width: 20px; height: 1px; background: var(--sea-green);"></div>
+                            <div style="width: 6px; height: 6px; background: var(--sea-green-light); border-radius: 50%;"></div>
+                            <div style="width: 30px; height: 2px; background: var(--sea-green); border-radius: 1px;"></div>
+                            <div style="width: 6px; height: 6px; background: var(--sea-green-light); border-radius: 50%;"></div>
+                            <div style="width: 20px; height: 1px; background: var(--sea-green);"></div>
+                        </div>
+                    </h2>
                     <div style="max-width: 800px; margin: 0 auto;">
                         <div class="luxury-card" style="margin-bottom: 20px;">
                             <div onclick="toggleFAQ(1)" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 20px;">
@@ -2746,11 +3109,8 @@
             }, 3000);
         }
 
-        // Hero slider functionality (desktop only)
+        // Hero slider functionality (all devices)
         function initHeroSlider() {
-            // Only run on desktop
-            if (window.innerWidth <= 768) return;
-            
             const slides = document.querySelectorAll('.hero-slide');
             let currentSlide = 0;
             
@@ -2787,10 +3147,45 @@
             setupSearch();
             setupMobileMenu();
             
+            // Initialize rates with fallback values immediately
+            if (!window.currentRates || Object.keys(window.currentRates).length === 0) {
+                console.log('🔄 Initializing rates with fallback values...');
+                window.currentRates = {
+                    gold24k: 7500,
+                    gold22k: 6870,
+                    gold18k: 5625,
+                    silver: 85
+                };
+            }
+            
             // Initialize rates display
             updateRatesDisplay();
             
-            // Initialize hero slider for desktop
+            // Try to fetch rates from Firebase after a delay
+            setTimeout(() => {
+                console.log('🔄 Attempting to fetch rates from Firebase...');
+                database.ref('rates').once('value', (snapshot) => {
+                    if (snapshot.exists()) {
+                        console.log('📊 Manual Firebase fetch successful:', snapshot.val());
+                    } else {
+                        console.log('📊 Manual Firebase fetch - no data found');
+                        // Try to set initial rates in Firebase
+                        database.ref('rates').set({
+                            gold: 7500,
+                            silver: 85,
+                            lastUpdated: new Date().toISOString()
+                        }).then(() => {
+                            console.log('✅ Initial rates set in Firebase');
+                        }).catch((error) => {
+                            console.error('❌ Failed to set initial rates:', error);
+                        });
+                    }
+                }).catch((error) => {
+                    console.error('❌ Manual Firebase fetch failed:', error);
+                });
+            }, 2000);
+            
+            // Initialize hero slider for all devices
             initHeroSlider();
         });
 
@@ -2876,21 +3271,21 @@
             
             grid.innerHTML = products.map(product => `
                 <div class="product-card" data-product-id="${product.id}" style="height: auto; display: flex; flex-direction: column;">
-                    <div style="padding: 20px; flex: 1; display: flex; flex-direction: column;">
-                        <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 16px; cursor: zoom-in; transition: transform 0.3s;" onclick="openImageZoom('${product.image}', '${product.name}')" onerror="this.src='https://via.placeholder.com/400x400/20B2AA/white?text=Jewelry'; this.alt='Jewelry Image';">
-                        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); text-align: center;">${product.name}</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 16px; line-height: 1.4; text-align: center; font-size: 14px; flex: 1;">${product.description}</p>
+                    <div style="padding: 16px; flex: 1; display: flex; flex-direction: column;">
+                        <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 280px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; cursor: zoom-in; transition: all 0.3s; box-shadow: 0 8px 20px rgba(0,0,0,0.15);" onclick="openImageZoom('${product.image}', '${product.name}')" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.25)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.15)'" onerror="this.src='https://via.placeholder.com/400x400/20B2AA/white?text=Jewelry'; this.alt='Jewelry Image';">
+                        <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); text-align: center;">${product.name}</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 16px; line-height: 1.4; text-align: center; font-size: 13px; flex: 1;">${product.description}</p>
                         
-                        <div style="background: var(--bg-secondary); padding: 16px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 16px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color);">
-                                <span style="font-weight: 600; color: var(--text-primary);">Weight:</span>
-                                <span style="font-weight: 700; color: var(--sea-green);">${product.weight}g</span>
+                        <div style="background: var(--bg-secondary); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border-color);">
+                                <span style="font-weight: 600; color: var(--text-primary); font-size: 13px;">Weight:</span>
+                                <span style="font-weight: 700; color: var(--sea-green); font-size: 13px;">${product.weight}g</span>
                             </div>
                             
                             ${category === 'gold' ? `
-                                <div style="margin-bottom: 12px;">
-                                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: var(--text-primary); font-size: 14px;">Select Carat:</label>
-                                    <select class="carat-select" onchange="calculatePrice('${product.id}')" style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-primary); color: var(--text-primary); font-size: 14px;">
+                                <div style="margin-bottom: 8px;">
+                                    <label style="display: block; font-weight: 600; margin-bottom: 4px; color: var(--text-primary); font-size: 12px;">Select Carat:</label>
+                                    <select class="carat-select" onchange="calculatePrice('${product.id}')" style="width: 100%; padding: 6px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-primary); color: var(--text-primary); font-size: 12px;">
                                         <option value="22k" selected>22K Gold</option>
                                         <option value="18k">18K Gold</option>
                                     </select>
@@ -2899,35 +3294,35 @@
                                 <input type="hidden" class="carat-select" value="silver">
                             `}
                             
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <span style="color: var(--text-secondary); font-size: 14px;">Carat Rate:</span>
-                                <span class="carat-rate" style="font-weight: 600; color: var(--text-primary); font-size: 14px;">₹0/g</span>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="color: var(--text-secondary); font-size: 12px;">Carat Rate:</span>
+                                <span class="carat-rate" style="font-weight: 600; color: var(--text-primary); font-size: 12px;">₹0/g</span>
                             </div>
                             
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <span style="color: var(--text-secondary); font-size: 14px;">Metal Cost:</span>
-                                <span class="metal-cost" style="font-weight: 600; color: var(--text-primary); font-size: 14px;">₹0</span>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="color: var(--text-secondary); font-size: 12px;">Metal Cost:</span>
+                                <span class="metal-cost" style="font-weight: 600; color: var(--text-primary); font-size: 12px;">₹0</span>
                             </div>
                             
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color);">
-                                <span style="color: var(--text-secondary); font-size: 14px;">Making Charges:</span>
-                                <span class="making-charges" style="font-weight: 600; color: var(--text-primary); font-size: 14px;">₹0</span>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border-color);">
+                                <span style="color: var(--text-secondary); font-size: 12px;">Making Charges:</span>
+                                <span class="making-charges" style="font-weight: 600; color: var(--text-primary); font-size: 12px;">₹0</span>
                             </div>
                             
                             <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span style="font-weight: 700; color: var(--text-primary); font-size: 16px;">Total Amount:</span>
-                                <span class="total-amount" style="font-weight: 800; color: ${category === 'gold' ? 'var(--sea-green)' : '#6b7280'}; font-size: 18px;">₹0</span>
+                                <span style="font-weight: 700; color: var(--text-primary); font-size: 14px;">Total Amount:</span>
+                                <span class="total-amount" style="font-weight: 800; color: ${category === 'gold' ? 'var(--sea-green)' : '#6b7280'}; font-size: 15px;">₹0</span>
                             </div>
                         </div>
                         
-                        <div style="display: flex; gap: 8px;">
+                        <div style="display: flex; gap: 6px;">
                             <button onclick="toggleWishlist('${product.id}', '${category}', '${subcategory}')" 
-                                    class="wishlist-btn" style="background: #ef4444; color: white; flex: 1; padding: 10px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">
+                                    class="wishlist-btn" style="background: #ef4444; color: white; flex: 1; padding: 8px; border-radius: 6px; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 12px;">
                                 <i class="fas fa-heart"></i>
                             </button>
                             <button onclick="addToCart('${product.id}', '${category}', '${subcategory}')" 
-                                    style="background: ${category === 'gold' ? 'var(--sea-green)' : '#6b7280'}; color: white; flex: 3; padding: 10px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 14px;">
-                                <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i>Add to Cart
+                                    style="background: ${category === 'gold' ? 'var(--sea-green)' : '#6b7280'}; color: white; flex: 3; padding: 8px; border-radius: 6px; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 12px;">
+                                <i class="fas fa-shopping-cart" style="margin-right: 4px;"></i>Add to Cart
                             </button>
                         </div>
                     </div>
@@ -3371,7 +3766,7 @@
                 grid.innerHTML = results.map(product => `
                     <div class="product-card">
                         <div style="padding: 20px; text-align: center;">
-                            <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" onerror="this.src='https://via.placeholder.com/400x400/20B2AA/white?text=Jewelry';">
+                            <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 300px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); cursor: zoom-in; transition: all 0.3s;" onclick="openImageZoom('${product.image}', '${product.name}')" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.25)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.15)'" onerror="this.src='https://via.placeholder.com/400x400/20B2AA/white?text=Jewelry';">
                             <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">${product.name}</h3>
                             <p style="color: var(--text-secondary); margin-bottom: 8px; line-height: 1.4;">${product.description}</p>
                             <p style="font-size: 14px; color: var(--sea-green); font-weight: 600; margin-bottom: 16px;">${product.category.charAt(0).toUpperCase() + product.category.slice(1)} - ${product.subcategory.charAt(0).toUpperCase() + product.subcategory.slice(1)}</p>
@@ -3874,5 +4269,5 @@
             });
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9807db3ac386c9b2',t:'MTc1ODEwNDI3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981a7a79c4705a0c',t:'MTc1ODI5OTUzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
