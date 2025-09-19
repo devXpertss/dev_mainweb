@@ -205,11 +205,17 @@
                 document.getElementById("current-silver").textContent = rates.silver || "--";
             }
             
-            // Recalculate all visible product prices
-            document.querySelectorAll('[data-product-id]').forEach(card => {
-                const productId = card.getAttribute('data-product-id');
-                calculatePrice(productId);
-            });
+            // Recalculate all visible product prices with a small delay
+            setTimeout(() => {
+                document.querySelectorAll('[data-product-id]').forEach(card => {
+                    const productId = card.getAttribute('data-product-id');
+                    if (productId) {
+                        calculatePrice(productId);
+                    }
+                });
+            }, 100);
+            
+            console.log('✅ Rates display updated and prices recalculated');
         }
         
         // Admin functions
@@ -1533,6 +1539,7 @@
             
             nav {
                 border-top: 1px solid #e5e7eb;
+                position: relative;
             }
             
             .nav-list {
@@ -1544,13 +1551,19 @@
                 border-top: 1px solid var(--border-color);
                 max-height: 0;
                 overflow: hidden;
-                transition: max-height 0.3s ease;
+                transition: all 0.3s ease;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             }
             
             .nav-list.show {
                 display: flex;
-                max-height: 400px;
-                padding: 8px 0;
+                max-height: 500px;
+                padding: 12px 0;
             }
             
             .nav-list li {
@@ -1582,12 +1595,19 @@
                 padding: 0;
                 min-width: auto;
                 margin-top: 0;
+                display: none;
+            }
+            
+            .dropdown.active .dropdown-menu {
+                display: block;
             }
             
             .dropdown-menu a {
-                padding: 8px 16px;
+                padding: 12px 20px;
                 font-size: 14px;
                 border-bottom: 1px solid var(--border-color);
+                display: block;
+                width: 100%;
             }
             
             .dropdown-menu a:last-child {
@@ -1599,10 +1619,10 @@
                 gap: 16px;
             }
             
-            /* Product grid responsive - 3 columns on mobile too */
+            /* Product grid responsive - 1 column on mobile */
             #products-grid {
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 12px !important;
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
             }
             
             .hero {
@@ -1874,7 +1894,7 @@
                     <li><a href="#" onclick="showPage('home')" class="nav-link">Home</a></li>
                     <li><a href="#" onclick="showPage('about')" class="nav-link">About</a></li>
                     <li class="dropdown">
-                        <a href="#" onclick="showPage('gold')" class="nav-link">
+                        <a href="#" onclick="toggleMobileDropdown(event, this)" class="nav-link">
                             Gold Jewellery <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
                         </a>
                         <div class="dropdown-menu">
@@ -1889,7 +1909,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a href="#" onclick="showPage('silver')" class="nav-link">
+                        <a href="#" onclick="toggleMobileDropdown(event, this)" class="nav-link">
                             Silver Jewellery <i class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
                         </a>
                         <div class="dropdown-menu">
@@ -3270,7 +3290,7 @@
             }
             
             grid.innerHTML = products.map(product => `
-                <div class="product-card" data-product-id="${product.id}" style="height: auto; display: flex; flex-direction: column;">
+                <div class="product-card" data-product-id="${product.id}" data-weight="${product.weight}" data-category="${category}" data-subcategory="${subcategory}" style="height: auto; display: flex; flex-direction: column;">
                     <div style="padding: 16px; flex: 1; display: flex; flex-direction: column;">
                         <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 280px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; cursor: zoom-in; transition: all 0.3s; box-shadow: 0 8px 20px rgba(0,0,0,0.15);" onclick="openImageZoom('${product.image}', '${product.name}')" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.25)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.15)'" onerror="this.src='https://via.placeholder.com/400x400/20B2AA/white?text=Jewelry'; this.alt='Jewelry Image';">
                         <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); text-align: center;">${product.name}</h3>
@@ -3334,14 +3354,24 @@
                 setTimeout(() => {
                     calculatePrice(product.id);
                     updateWishlistButton(product.id);
-                }, 100);
+                }, 200);
             });
+            
+            // Also trigger calculation when rates are updated
+            setTimeout(() => {
+                products.forEach(product => {
+                    calculatePrice(product.id);
+                });
+            }, 500);
         }
 
         // Calculate price for a product
         function calculatePrice(productId) {
             const productCard = document.querySelector(`[data-product-id="${productId}"]`);
-            if (!productCard) return;
+            if (!productCard) {
+                console.log('Product card not found for ID:', productId);
+                return;
+            }
             
             const caratSelect = productCard.querySelector('.carat-select');
             const caratRateSpan = productCard.querySelector('.carat-rate');
@@ -3349,36 +3379,64 @@
             const makingChargesSpan = productCard.querySelector('.making-charges');
             const totalAmountSpan = productCard.querySelector('.total-amount');
             
-            // Get weight from product data (fixed weight)
-            const category = getCurrentCategory();
-            const subcategory = getCurrentSubcategory();
-            const product = findProductById(productId, category, subcategory);
-            const weight = product ? product.weight : 0;
-            
-            let rate = 0;
-            
-            if (caratSelect && caratSelect.value !== 'silver') {
-                // Gold product
-                const carat = caratSelect.value;
-                if (carat === '22k') {
-                    rate = window.currentRates.gold22k || 0;
-                } else if (carat === '18k') {
-                    rate = window.currentRates.gold18k || 0;
-                }
-            } else {
-                // Silver product
-                rate = window.currentRates.silver || 0;
+            if (!caratSelect || !caratRateSpan || !metalCostSpan || !makingChargesSpan || !totalAmountSpan) {
+                console.log('Price elements not found for product:', productId);
+                return;
             }
             
+            // Get weight from product data
+            let weight = 0;
+            let rate = 0;
+            
+            // Try to get product data from current page context
+            if (currentPage === 'subcategory') {
+                const category = getCurrentCategory();
+                const subcategory = getCurrentSubcategory();
+                const product = findProductById(productId, category, subcategory);
+                weight = product ? product.weight : 0;
+            } else {
+                // For search results or other contexts, get weight from data attribute or find in all products
+                const weightAttr = productCard.getAttribute('data-weight');
+                if (weightAttr) {
+                    weight = parseFloat(weightAttr);
+                } else {
+                    // Search through all products
+                    Object.keys(window.productData || {}).forEach(category => {
+                        Object.keys(window.productData[category] || {}).forEach(subcategory => {
+                            const product = window.productData[category][subcategory].find(p => p.id === productId);
+                            if (product) {
+                                weight = product.weight;
+                            }
+                        });
+                    });
+                }
+            }
+            
+            // Determine the rate based on carat selection
+            const caratValue = caratSelect.value;
+            
+            if (caratValue === 'silver') {
+                rate = window.currentRates.silver || 85; // Fallback rate
+            } else if (caratValue === '22k') {
+                rate = window.currentRates.gold22k || 6870; // Fallback rate
+            } else if (caratValue === '18k') {
+                rate = window.currentRates.gold18k || 5625; // Fallback rate
+            }
+            
+            console.log(`Calculating price for ${productId}: weight=${weight}g, rate=₹${rate}/g, carat=${caratValue}`);
+            
+            // Calculate costs
             const metalCost = Math.round(weight * rate);
             const makingCharges = Math.round(metalCost * 0.15);
             const totalAmount = metalCost + makingCharges;
             
-            // Update all price elements
-            if (caratRateSpan) caratRateSpan.textContent = `₹${rate.toLocaleString('en-IN')}/g`;
+            // Update all price elements with proper formatting
+            caratRateSpan.textContent = `₹${rate.toLocaleString('en-IN')}/g`;
             metalCostSpan.textContent = `₹${metalCost.toLocaleString('en-IN')}`;
             makingChargesSpan.textContent = `₹${makingCharges.toLocaleString('en-IN')}`;
             totalAmountSpan.textContent = `₹${totalAmount.toLocaleString('en-IN')}`;
+            
+            console.log(`Price calculated: Metal=₹${metalCost}, Making=₹${makingCharges}, Total=₹${totalAmount}`);
         }
         
         // Helper functions for price calculation
@@ -3764,12 +3822,13 @@
                 `;
             } else {
                 grid.innerHTML = results.map(product => `
-                    <div class="product-card">
+                    <div class="product-card" data-product-id="${product.id}" data-weight="${product.weight}" data-category="${product.category}" data-subcategory="${product.subcategory}">
                         <div style="padding: 20px; text-align: center;">
                             <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 300px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); cursor: zoom-in; transition: all 0.3s;" onclick="openImageZoom('${product.image}', '${product.name}')" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.25)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.15)'" onerror="this.src='https://via.placeholder.com/400x400/20B2AA/white?text=Jewelry';">
                             <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary);">${product.name}</h3>
                             <p style="color: var(--text-secondary); margin-bottom: 8px; line-height: 1.4;">${product.description}</p>
-                            <p style="font-size: 14px; color: var(--sea-green); font-weight: 600; margin-bottom: 16px;">${product.category.charAt(0).toUpperCase() + product.category.slice(1)} - ${product.subcategory.charAt(0).toUpperCase() + product.subcategory.slice(1)}</p>
+                            <p style="font-size: 14px; color: var(--sea-green); font-weight: 600; margin-bottom: 8px;">${product.category.charAt(0).toUpperCase() + product.category.slice(1)} - ${product.subcategory.charAt(0).toUpperCase() + product.subcategory.slice(1)}</p>
+                            <p style="font-size: 14px; color: var(--text-primary); font-weight: 600; margin-bottom: 16px;">Weight: ${product.weight}g</p>
                             <button onclick="showSubcategory('${product.category}', '${product.subcategory}')" 
                                     style="width: 100%; padding: 12px; border: none; border-radius: 8px; background: ${product.category === 'gold' ? 'var(--sea-green)' : '#6b7280'}; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;">
                                 <i class="fas fa-eye" style="margin-right: 8px;"></i>View Details
@@ -3796,6 +3855,42 @@
             }
         }
 
+        // Toggle mobile dropdown
+        function toggleMobileDropdown(event, element) {
+            // Only handle dropdown toggle on mobile
+            if (window.innerWidth <= 768) {
+                event.preventDefault();
+                event.stopPropagation();
+                
+                const dropdown = element.closest('.dropdown');
+                const isActive = dropdown.classList.contains('active');
+                
+                // Close all other dropdowns
+                document.querySelectorAll('.dropdown').forEach(d => {
+                    d.classList.remove('active');
+                });
+                
+                // Toggle current dropdown
+                if (!isActive) {
+                    dropdown.classList.add('active');
+                }
+                
+                // Rotate chevron icon
+                const chevron = element.querySelector('.fa-chevron-down');
+                if (chevron) {
+                    chevron.style.transform = dropdown.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                }
+            } else {
+                // On desktop, navigate to the main category page
+                const text = element.textContent.toLowerCase();
+                if (text.includes('gold')) {
+                    showPage('gold');
+                } else if (text.includes('silver')) {
+                    showPage('silver');
+                }
+            }
+        }
+
         // Setup mobile menu
         function setupMobileMenu() {
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -3803,6 +3898,32 @@
             
             mobileMenuBtn.addEventListener('click', function() {
                 mainNav.classList.toggle('show');
+            });
+            
+            // Close mobile menu when clicking on nav links (but not dropdown toggles)
+            const navLinks = document.querySelectorAll('#main-nav a:not(.dropdown > a)');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mainNav.classList.remove('show');
+                    // Close all dropdowns
+                    document.querySelectorAll('.dropdown').forEach(d => {
+                        d.classList.remove('active');
+                    });
+                });
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = mainNav.contains(event.target);
+                const isClickOnMenuBtn = mobileMenuBtn.contains(event.target);
+                
+                if (!isClickInsideNav && !isClickOnMenuBtn && mainNav.classList.contains('show')) {
+                    mainNav.classList.remove('show');
+                    // Close all dropdowns
+                    document.querySelectorAll('.dropdown').forEach(d => {
+                        d.classList.remove('active');
+                    });
+                }
             });
         }
 
@@ -4269,5 +4390,5 @@
             });
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981a7a79c4705a0c',t:'MTc1ODI5OTUzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981ad782227158bb',t:'MTc1ODMwMzM1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
