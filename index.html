@@ -822,54 +822,117 @@
                 opacity: 1;
             }
         }
-        
-/* Header Styles */
+        <!-- Header -->
+<header>
+    <div class="header-content">
+
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <img src="https://i.postimg.cc/mkLTwNcm/logo.jpg" alt="Varnika Jewellers">
+            <div class="logo-text">
+                <h1>Varnika Jewellers</h1>
+                <p>Premium Gold & Silver Jewelry</p>
+            </div>
+        </div>
+
+        <!-- Header Actions -->
+        <div class="header-actions">
+            <!-- Wishlist -->
+            <button id="wishlist-button">
+                <i class="fas fa-heart"></i>
+                <span id="wishlist-count" class="hidden">0</span>
+            </button>
+
+            <!-- Cart -->
+            <button id="cart-button">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="hidden">0</span>
+            </button>
+
+            <!-- Hamburger Menu Button -->
+            <button id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <!-- Navigation Links -->
+        <a href="#" onclick="showPage('home')">Home</a>
+        <a href="#" onclick="showPage('about')">About</a>
+        <div class="dropdown">
+            <a href="#">Gold Jewellery</a>
+            <div class="dropdown-menu">
+                <a href="#" onclick="showSubcategory('gold', 'chains')">Chains</a>
+                <a href="#" onclick="showSubcategory('gold', 'rings')">Rings</a>
+                <a href="#" onclick="showSubcategory('gold', 'sets')">Sets</a>
+                <a href="#" onclick="showSubcategory('gold', 'bangles')">Bangles</a>
+                <a href="#" onclick="showSubcategory('gold', 'mangalsutra')">Mangal Sutra</a>
+                <a href="#" onclick="showSubcategory('gold', 'tops')">Tops</a>
+                <a href="#" onclick="showSubcategory('gold', 'jhumka')">Jhumka</a>
+                <a href="#" onclick="showSubcategory('gold', 'pendants')">Pendants</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">Silver Jewellery</a>
+            <div class="dropdown-menu">
+                <a href="#" onclick="showSubcategory('silver', 'payal')">Payal</a>
+                <a href="#" onclick="showSubcategory('silver', 'chains')">Chains</a>
+                <a href="#" onclick="showSubcategory('silver', 'rings')">Rings</a>
+                <a href="#" onclick="showSubcategory('silver', 'toerings')">Toe Rings</a>
+                <a href="#" onclick="showSubcategory('silver', 'mangalsutra')">Mangal Sutra</a>
+                <a href="#" onclick="showSubcategory('silver', 'kids')">Kids Items</a>
+                <a href="#" onclick="showSubcategory('silver', 'pooja')">Pooja Utensils</a>
+            </div>
+        </div>
+        <a href="#" onclick="showPage('contact')">Contact</a>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle">
+            <i class="fas fa-moon"></i> Theme
+        </button>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/varnika.jewellerspnp?igsh=MXQyMGk3YzNycm14eQ==" target="_blank">
+            <i class="fab fa-instagram"></i> Instagram
+        </a>
+
+        <!-- Admin Login -->
+        <button onclick="showPage('admin-login')">
+            <i class="fas fa-user-shield"></i> Admin
+        </button>
+    </div>
+</header>
+
+/* Header Base */
 header {
-    width: 100%;               /* Full screen width */
-    max-width: 100%;           /* Prevent overflow */
-    box-sizing: border-box;    /* Include padding/border in width */
-    overflow-x: hidden;        /* Avoid horizontal scroll */
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.95) 0%, 
-        rgba(247, 231, 206, 0.9) 100%);
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(247,231,206,0.9) 100%);
     backdrop-filter: blur(20px);
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(212, 175, 55, 0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 0 0 1px rgba(212,175,55,0.1);
     position: sticky;
     top: 0;
     z-index: 50;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    border-bottom: 1px solid rgba(212,175,55,0.2);
+    font-family: 'Poppins', sans-serif;
 }
 
 .theme-dark header {
-    background: linear-gradient(135deg, 
-        rgba(15, 20, 25, 0.95) 0%, 
-        rgba(27, 41, 81, 0.9) 100%);
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(212, 175, 55, 0.2);
+    background: linear-gradient(135deg, rgba(15,20,25,0.95) 0%, rgba(27,41,81,0.9) 100%);
 }
 
 .header-content {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 2px 8px;
-    min-height: 5px;
-    flex-wrap: wrap; /* Wrap content on small screens */
-    gap: 12px;
-    width: 100%;    /* Responsive width */
-    max-width: 100%;
-    box-sizing: border-box;
+    align-items: center;
+    padding: 6px 16px;
+    flex-wrap: wrap;
 }
 
 .logo-section {
     display: flex;
     align-items: center;
-    gap: 1px;
-    flex-shrink: 0;
-    min-width: 1px;
+    gap: 8px;
 }
 
 .logo-section img {
@@ -886,54 +949,21 @@ header {
     background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-gold-dark));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
     line-height: 1;
-    text-shadow: 0 2px 4px rgba(212, 175, 55, 0.3);
+    text-shadow: 0 2px 4px rgba(212,175,55,0.3);
+    margin:0;
 }
 
 .logo-text p {
     font-size: 11px;
     color: #6b7280;
-    line-height: 1;
-}
-
-.search-bar {
-    flex: 1;
-    max-width: 450px;
-    min-width: 150px; /* Reduced min-width for mobile */
-    margin: 0 2px;
-    position: relative;
-}
-
-.search-bar input {
-    width: 100%;
-    padding: 5px 5px;
-    border: 1px solid #d1d5db;
-    border-radius: 25px;
-    outline: none;
-    transition: border-color 0.3s;
-    font-size: 15px;
-}
-
-.search-bar input:focus {
-    border-color: var(--sea-green);
-}
-
-.search-bar i {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #9ca3af;
-    font-size: 16px;
+    margin:0;
 }
 
 .header-actions {
     display: flex;
     align-items: center;
     gap: 12px;
-    flex-shrink: 0;
-    flex-wrap: wrap;
 }
 
 .header-actions button, .header-actions a {
@@ -942,15 +972,13 @@ header {
     background: none;
     border: none;
     color: #6b7280;
-    transition: all 0.3s;
     cursor: pointer;
-    text-decoration: none;
-    font-size: 18px;
-    width: 42px;
-    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 18px;
+    width: 42px;
+    height: 42px;
 }
 
 .header-actions button:hover, .header-actions a:hover {
@@ -959,46 +987,46 @@ header {
     transform: scale(1.1);
 }
 
-.contact-info {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-size: 13px;
-    margin-left: 16px;
+/* Mobile Menu */
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--header-bg);
+    padding: 16px;
 }
 
-.contact-info a {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #6b7280;
-    text-decoration: none;
-    transition: color 0.3s;
-    white-space: nowrap;
-    padding: 4px 8px;
-    border-radius: 6px;
+.mobile-menu a, .mobile-menu button {
+    text-align: left;
 }
 
-.contact-info a:hover {
-    color: var(--sea-green);
-    background: rgba(32, 178, 170, 0.1);
-}
-
-/* MOBILE RESPONSIVE FIXES */
+/* RESPONSIVE MOBILE */
 @media (max-width: 768px) {
-    .search-bar {
-        max-width: 100%;
+    /* Hide other header actions except wishlist & cart */
+    .header-actions > button:not(#wishlist-button):not(#cart-button),
+    .header-actions > a {
+        display: none;
     }
+
+    /* Show hamburger */
+    #mobile-menu-btn {
+        display: flex;
+    }
+
+    /* Hide search bar */
+    .search-bar {
+        display: none;
+    }
+
+    /* Mobile logo size */
     .logo-text h1 {
         font-size: 18px;
     }
     .logo-text p {
         font-size: 10px;
     }
-    .header-actions {
-        gap: 6px;
-    }
 }
+
         /* Navigation */
         nav {
             border-top: 1px solid #e5e7eb;
