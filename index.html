@@ -2289,128 +2289,197 @@
             </div>
         </div>
     </div>
-    <!-- Live Rates Ticker -->
-    <div style="background: linear-gradient(135deg, var(--deep-navy) 0%, var(--midnight-blue) 100%); color: var(--diamond-white); padding: 16px 0; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); position: relative;">
-        <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--luxury-gold), var(--deep-navy), var(--luxury-gold)); animation: shimmer 3s ease-in-out infinite;"></div>
-        <div class="ticker-scroll" style="display: flex; align-items: center; gap: 60px; animation: scroll 25s linear infinite;">
-            <span style="font-size: 18px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 8px;">
-                <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-chart-line" style="color: var(--luxury-gold);"></i>
-                LIVE GOLD & SILVER RATES
-            </span>
-            <span id="live-rates" style="font-size: 16px; font-weight: 600; background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1)); padding: 0px 20px; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.3); backdrop-filter: blur(10px);">
-                <span class="skeleton"></span>
-            </span>
-            <span style="font-size: 18px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 8px;">
-                <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-gem" style="color: var(--luxury-gold);"></i>
-                PREMIUM JEWELRY COLLECTION
-            </span>
-            <span style="font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-certificate" style="color: var(--luxury-gold);"></i>
-                CERTIFIED PURITY GUARANTEED
-            </span>
-            <span style="font-size: 18px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 8px;">
-                <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-crown" style="color: var(--luxury-gold);"></i>
-                LUXURY CRAFTSMANSHIP
-            </span>
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Live Rates Ticker -->
+<div style="background: linear-gradient(135deg, var(--deep-navy) 0%, var(--midnight-blue) 100%); color: var(--diamond-white); padding: 10px 0; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); position: relative; font-family: 'Poppins', sans-serif;">
+    <!-- Shimmer Line -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--luxury-gold), var(--deep-navy), var(--luxury-gold)); animation: shimmer 3s ease-in-out infinite;"></div>
+
+    <!-- Ticker Scroll -->
+    <div class="ticker-scroll" style="display: flex; align-items: center; gap: 40px; animation: scroll 20s linear infinite; white-space: nowrap;">
+        <!-- Item 1 -->
+        <span style="font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+            <i class="fas fa-chart-line" style="color: var(--luxury-gold); font-size: 18px;"></i>
+            LIVE GOLD & SILVER RATES
+        </span>
+
+        <!-- Item 2 -->
+        <span id="live-rates" style="font-size: 14px; font-weight: 500; background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1)); padding: 2px 12px; border-radius: 18px; border: 1px solid rgba(212, 175, 55, 0.3); backdrop-filter: blur(6px);">
+            <span class="skeleton"></span>
+        </span>
+
+        <!-- Item 3 -->
+        <span style="font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+            <i class="fas fa-gem" style="color: var(--luxury-gold); font-size: 18px;"></i>
+            PREMIUM JEWELRY COLLECTION
+        </span>
+
+        <!-- Item 4 -->
+        <span style="font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 6px;">
+            <i class="fas fa-certificate" style="color: var(--luxury-gold); font-size: 16px;"></i>
+            CERTIFIED PURITY GUARANTEED
+        </span>
+
+        <!-- Item 5 -->
+        <span style="font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+            <i class="fas fa-crown" style="color: var(--luxury-gold); font-size: 18px;"></i>
+            LUXURY CRAFTSMANSHIP
+        </span>
     </div>
+</div>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <!-- Logo -->
-                <div class="logo-section">
-                    <img src="https://i.postimg.cc/mkLTwNcm/logo.jpg" alt="Varnika Jewellers" onerror="this.src=''; this.alt='Varnika Jewellers'; this.style.display='none';">
-                    <div class="logo-text">
-                        <h1>Varnika Jewellers</h1>
-                        <p>Premium Gold & Silver Jewelry</p>
-                    </div>
-                </div>
 
-                <!-- Search Bar -->
-                <div class="search-bar">
-                    <input type="text" id="search-input" placeholder="Search jewelry...">
-                    <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-search"></i>
-                </div>
 
-                <!-- Header Actions -->
-                <div class="header-actions">
-                    <!-- Theme Toggle -->
-                    <button id="theme-toggle">
-                        <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-moon"></i>
-                    </button>
-                    
-                    <!-- Wishlist -->
-                    <button onclick="showWishlist()" style="position: relative;">
-                        <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-heart"></i>
-                        <span id="wishlist-count" class="hidden" style="position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; font-size: 12px; border-radius: 50%; height: 20px; width: 20px; display: flex; align-items: center; justify-content: center;">0</span>
-                    </button>
-                    
-                    <!-- Cart -->
-                    <button onclick="showCart()" style="position: relative;">
-                        <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-shopping-cart"></i>
-                        <span id="cart-count" class="hidden" style="position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; font-size: 12px; border-radius: 50%; height: 20px; width: 20px; display: flex; align-items: center; justify-content: center;">0</span>
-                    </button>
-                    
-                    <!-- Instagram -->
-                    <a href="https://www.instagram.com/varnika.jewellerspnp?igsh=MXQyMGk3YzNycm14eQ==" target="_blank">
-                        <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fab fa-instagram" style="color: #e91e63;"></i>
-                    </a>
-                    
-                    <!-- Admin Login -->
-                    <button onclick="showPage('admin-login')" style="padding: 8px; border-radius: 50%; background: none; border: none; color: #6b7280; transition: all 0.3s; cursor: pointer;">
-                        <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-user-shield"></i>
-                    </button>
-                    
 
-                </div>
 
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" style="display: none;">
-                    <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-bars" style="font-size: 20px;"></i>
-                </button>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Header -->
+<header style="background: var(--header-bg); transition: background 0.3s;">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between; padding: 6px 16px; font-family: 'Poppins', sans-serif;">
+        
+        <!-- Logo -->
+        <div class="logo-section" style="display: flex; align-items: center; gap: 8px;">
+            <img src="https://i.postimg.cc/mkLTwNcm/logo.jpg" alt="Varnika Jewellers" 
+                 onerror="this.src=''; this.alt='Varnika Jewellers'; this.style.display='none';"
+                 style="height: 36px; width: auto; object-fit: contain;">
+            <div class="logo-text" style="line-height: 1;">
+                <h1 style="font-size: 20px; font-weight: 700; color: var(--luxury-gold); margin: 0;">Varnika Jewellers</h1>
+                <p style="font-size: 12px; color: var(--text-secondary); margin: 0;">Premium Gold & Silver Jewelry</p>
             </div>
+        </div>
 
-            <!-- Navigation -->
-            <nav>
-                <ul class="nav-list" id="main-nav">
-                    <li><a href="#" onclick="showPage('home')" class="nav-link">Home</a></li>
-                    <li><a href="#" onclick="showPage('about')" class="nav-link">About</a></li>
-                    <li class="dropdown">
-                        <a href="#" onclick="toggleMobileDropdown(event, this)" class="nav-link">
-                            Gold Jewellery <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="#" onclick="showSubcategory('gold', 'chains')">Chains</a>
-                            <a href="#" onclick="showSubcategory('gold', 'rings')">Rings</a>
-                            <a href="#" onclick="showSubcategory('gold', 'sets')">Sets</a>
-                            <a href="#" onclick="showSubcategory('gold', 'bangles')">Bangles</a>
-                            <a href="#" onclick="showSubcategory('gold', 'mangalsutra')">Mangal Sutra</a>
-                            <a href="#" onclick="showSubcategory('gold', 'tops')">Tops</a>
-                            <a href="#" onclick="showSubcategory('gold', 'jhumka')">Jhumka</a>
-                            <a href="#" onclick="showSubcategory('gold', 'pendants')">Pendants</a>
-                        </div>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" onclick="toggleMobileDropdown(event, this)" class="nav-link">
-                            Silver Jewellery <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-chevron-down" style="font-size: 12px; margin-left: 4px;"></i>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="#" onclick="showSubcategory('silver', 'payal')">Payal</a>
-                            <a href="#" onclick="showSubcategory('silver', 'chains')">Chains</a>
-                            <a href="#" onclick="showSubcategory('silver', 'rings')">Rings</a>
-                            <a href="#" onclick="showSubcategory('silver', 'toerings')">Toe Rings</a>
-                            <a href="#" onclick="showSubcategory('silver', 'mangalsutra')">Mangal Sutra</a>
-                            <a href="#" onclick="showSubcategory('silver', 'kids')">Kids Items</a>
-                            <a href="#" onclick="showSubcategory('silver', 'pooja')">Pooja Utensils</a>
-                        </div>
-                    </li>
-                    <li><a href="#" onclick="showPage('contact')" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
+        <!-- Search Bar -->
+        <div class="search-bar" style="position: relative; flex: 1; max-width: 320px; margin: 0 16px;">
+            <input type="text" id="search-input" placeholder="Search jewelry..."
+                   style="width: 100%; padding: 8px 36px 8px 12px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-primary); font-size: 14px; outline: none; transition: all 0.3s;">
+            <i class="fas fa-search" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--luxury-gold); font-size: 16px;"></i>
+        </div>
+
+        <!-- Header Actions -->
+        <div class="header-actions" style="display: flex; align-items: center; gap: 10px;">
+            <!-- Theme Toggle -->
+            <button id="theme-toggle" style="background: none; border: none; cursor: pointer;">
+                <i class="fas fa-moon" style="color: var(--luxury-gold); font-size: 18px;"></i>
+            </button>
+
+            <!-- Wishlist -->
+            <button onclick="showWishlist()" style="position: relative; background: none; border: none; cursor: pointer;">
+                <i class="fas fa-heart" style="color: var(--luxury-gold); font-size: 18px;"></i>
+                <span id="wishlist-count" class="hidden" style="position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; font-size: 10px; border-radius: 50%; height: 16px; width: 16px; display: flex; align-items: center; justify-content: center;">0</span>
+            </button>
+
+            <!-- Cart -->
+            <button onclick="showCart()" style="position: relative; background: none; border: none; cursor: pointer;">
+                <i class="fas fa-shopping-cart" style="color: var(--luxury-gold); font-size: 18px;"></i>
+                <span id="cart-count" class="hidden" style="position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; font-size: 10px; border-radius: 50%; height: 16px; width: 16px; display: flex; align-items: center; justify-content: center;">0</span>
+            </button>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/varnika.jewellerspnp?igsh=MXQyMGk3YzNycm14eQ==" target="_blank">
+                <i class="fab fa-instagram" style="color: #e91e63; font-size: 18px;"></i>
+            </a>
+
+            <!-- Admin Login -->
+            <button onclick="showPage('admin-login')" style="padding: 6px; border-radius: 50%; background: none; border: none; cursor: pointer;">
+                <i class="fas fa-user-shield" style="color: var(--luxury-gold); font-size: 18px;"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" style="display: none; background: none; border: none; cursor: pointer;">
+            <i class="fas fa-bars" style="color: var(--luxury-gold); font-size: 20px;"></i>
+        </button>
+
+    </div>
+</header>
+
+
+
+
+
+
+
+
+
+
+<!-- Navigation -->
+<nav style="font-family: 'Playfair Display', serif;">
+    <ul class="nav-list" id="main-nav" style="list-style: none; display: flex; gap: 25px; padding: 0; margin: 0; justify-content: center; align-items: center;">
+        <li><a href="#" onclick="showPage('home')" class="nav-link" style="color: #D4AF37; text-decoration: none; font-weight: 600; font-size: 18px;">Home</a></li>
+        <li><a href="#" onclick="showPage('about')" class="nav-link" style="color: #D4AF37; text-decoration: none; font-weight: 600; font-size: 18px;">About</a></li>
+        <li class="dropdown">
+            <a href="#" onclick="toggleMobileDropdown(event, this)" class="nav-link" style="color: #D4AF37; text-decoration: none; font-weight: 600; font-size: 18px;">
+                Gold Jewellery 
+                <i class="fas fa-chevron-down" style="color: #D4AF37; font-size: 14px; margin-left: 5px;"></i>
+            </a>
+            <div class="dropdown-menu" style="font-family: 'Poppins', sans-serif; font-size: 16px;">
+                <a href="#" onclick="showSubcategory('gold', 'chains')" style="color: #D4AF37;">Chains</a>
+                <a href="#" onclick="showSubcategory('gold', 'rings')" style="color: #D4AF37;">Rings</a>
+                <a href="#" onclick="showSubcategory('gold', 'sets')" style="color: #D4AF37;">Sets</a>
+                <a href="#" onclick="showSubcategory('gold', 'bangles')" style="color: #D4AF37;">Bangles</a>
+                <a href="#" onclick="showSubcategory('gold', 'mangalsutra')" style="color: #D4AF37;">Mangal Sutra</a>
+                <a href="#" onclick="showSubcategory('gold', 'tops')" style="color: #D4AF37;">Tops</a>
+                <a href="#" onclick="showSubcategory('gold', 'jhumka')" style="color: #D4AF37;">Jhumka</a>
+                <a href="#" onclick="showSubcategory('gold', 'pendants')" style="color: #D4AF37;">Pendants</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="#" onclick="toggleMobileDropdown(event, this)" class="nav-link" style="color: #D4AF37; text-decoration: none; font-weight: 600; font-size: 18px;">
+                Silver Jewellery 
+                <i class="fas fa-chevron-down" style="color: #D4AF37; font-size: 14px; margin-left: 5px;"></i>
+            </a>
+            <div class="dropdown-menu" style="font-family: 'Poppins', sans-serif; font-size: 16px;">
+                <a href="#" onclick="showSubcategory('silver', 'payal')" style="color: #D4AF37;">Payal</a>
+                <a href="#" onclick="showSubcategory('silver', 'chains')" style="color: #D4AF37;">Chains</a>
+                <a href="#" onclick="showSubcategory('silver', 'rings')" style="color: #D4AF37;">Rings</a>
+                <a href="#" onclick="showSubcategory('silver', 'toerings')" style="color: #D4AF37;">Toe Rings</a>
+                <a href="#" onclick="showSubcategory('silver', 'mangalsutra')" style="color: #D4AF37;">Mangal Sutra</a>
+                <a href="#" onclick="showSubcategory('silver', 'kids')" style="color: #D4AF37;">Kids Items</a>
+                <a href="#" onclick="showSubcategory('silver', 'pooja')" style="color: #D4AF37;">Pooja Utensils</a>
+            </div>
+        </li>
+        <li><a href="#" onclick="showPage('contact')" class="nav-link" style="color: #D4AF37; text-decoration: none; font-weight: 600; font-size: 18px;">Contact</a></li>
+    </ul>
+</nav>
+
         </div>
     </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Main Content -->
     <main id="main-content" class="min-h-screen">
@@ -2501,12 +2570,12 @@
                 </div>
             </section>
 
-            <!-- Elegant Offer Banner -->
-            <section style="background: var(--champagne); color: var(--maroon-primary); padding: 20px 0; text-align: center; border-bottom: 1px solid var(--border-color);">
-                <div class="container">
-                    <p style="font-size: 16px; font-weight: 600; margin: 0;">🎉 Special Offer: Up to 25% Off on Bridal Collections | Free Gold Plating on Silver Jewelry | Certified Purity Guaranteed</p>
-                </div>
-            </section>
+<!-- Elegant Offer Banner -->
+<section style="background: var(--champagne); color: #800000; padding: 20px 0; text-align: center; border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+        <p style="font-size: 16px; font-weight: 600; margin: 0; color: #800000;">🎉 Special Offer: Up to 25% Off on Bridal Collections | Free Gold Plating on Silver Jewelry | Certified Purity Guaranteed</p>
+    </div>
+</section>
 
             <!-- Featured Collections with Rich Images -->
             <section class="section" style="background: linear-gradient(135deg, var(--bg-primary) 0%, var(--champagne) 100%); padding: 120px 0; position: relative; overflow: hidden;">
@@ -3081,343 +3150,347 @@
             </section>
         </div>
 
-        <!-- Contact Page -->
-        <div id="contact-page" class="page hidden">
-            <section class="py-16 bg-white">
-                <div class="container mx-auto px-4">
-                    <h1 class="text-4xl font-playfair font-bold text-center mb-12 gold-text">Contact Us</h1>
-                    <div class="max-w-4xl mx-auto">
-                        <div class="grid md:grid-cols-2 gap-12">
-                            <div>
-                                <h2 class="text-2xl font-semibold mb-6">Get in Touch</h2>
-                                <div class="space-y-6">
-                                    <div class="flex items-center space-x-4">
-                                        <div class="w-12 h-12 gold-gradient rounded-full flex items-center justify-center">
-                                            <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-envelope text-white"></i>
-                                        </div>
-                                        <div>
-                                            <h3 class="font-semibold">Email</h3>
-                                            <a href="mailto:vernikajewellers56@gmail.com" class="text-gray-600 hover:text-yellow-600">
-                                                vernikajewellers56@gmail.com
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4">
-                                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                                            <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fab fa-whatsapp text-white"></i>
-                                        </div>
-                                        <div>
-                                            <h3 class="font-semibold">WhatsApp</h3>
-                                            <a href="https://wa.me/919034348408" class="text-gray-600 hover:text-green-600">
-                                                +91 90343 48408
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4">
-                                        <div class="w-12 h-12 gold-gradient rounded-full flex items-center justify-center">
-                                            <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-clock text-white"></i>
-                                        </div>
-                                        <div>
-                                            <h3 class="font-semibold">Business Hours</h3>
-                                            <p class="text-gray-600">Mon - Sat: 10:00 AM - 8:00 PM</p>
-                                            <p class="text-gray-600">Sunday: 11:00 AM - 6:00 PM</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-gray-50 p-8 rounded-lg">
-                                <h3 class="text-xl font-semibold mb-6">Send us a Message</h3>
-                                <form class="space-y-4">
-                                    <div>
-                                        <label class="block text-sm font-medium mb-2">Name</label>
-                                        <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium mb-2">Email</label>
-                                        <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium mb-2">Message</label>
-                                        <textarea rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500"></textarea>
-                                    </div>
-                                    <button type="button" onclick="sendContactMessage()" class="w-full gold-gradient text-white py-3 rounded-lg font-semibold hover:opacity-90 transition">
-                                        Send Message via WhatsApp
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
+<!-- Contact Page -->
+<div id="contact-page" class="page hidden">
+    <section style="background-color: var(--bg-light); color: var(--text-light); padding: 80px 0; font-family: 'Playfair Display', serif;">
+        <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
 
-        <!-- Admin Login Page -->
-        <div id="admin-login-page" class="page hidden">
-            <section class="section" style="background: linear-gradient(135deg, var(--sea-green), var(--sea-green-dark), var(--sea-green-light)); min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
-                <!-- Animated Background Elements -->
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
-                    <div style="position: absolute; top: 10%; left: 10%; width: 200px; height: 200px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
-                    <div style="position: absolute; top: 60%; right: 15%; width: 150px; height: 150px; background: rgba(255, 255, 255, 0.08); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; animation: float 8s ease-in-out infinite reverse;"></div>
-                    <div style="position: absolute; bottom: 20%; left: 20%; width: 100px; height: 100px; background: rgba(255, 255, 255, 0.06); border-radius: 20px; transform: rotate(45deg); animation: float 10s ease-in-out infinite;"></div>
-                    <div style="position: absolute; top: 30%; right: 30%; width: 80px; height: 80px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; animation: float 7s ease-in-out infinite;"></div>
-                </div>
-                
-                <div class="luxury-card" style="max-width: 500px; width: 100%; margin: 20px; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3); position: relative; z-index: 10;">
-                    <!-- Header Section -->
-                    <div style="text-align: center; margin-bottom: 40px; position: relative;">
-                        <!-- Logo with glow effect -->
-                        <div style="position: relative; display: inline-block; margin-bottom: 24px;">
-                            <div style="width: 100px; height: 100px; background: linear-gradient(135deg, var(--sea-green), var(--sea-green-light)); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(32, 178, 170, 0.4); position: relative;">
-                                <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-user-shield" style="color: white; font-size: 40px;"></i>
-                                <!-- Glow rings -->
-                                <div style="position: absolute; width: 120px; height: 120px; border: 2px solid rgba(32, 178, 170, 0.3); border-radius: 50%; animation: pulse 2s infinite;"></div>
-                                <div style="position: absolute; width: 140px; height: 140px; border: 1px solid rgba(32, 178, 170, 0.2); border-radius: 50%; animation: pulse 2s infinite 0.5s;"></div>
-                            </div>
+            <!-- Heading -->
+            <h1 style="font-size: 42px; font-weight: 700; color: #D4AF37; margin-bottom: 40px;">Contact Us</h1>
+
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;">
+
+                <!-- Contact Info -->
+                <div style="flex: 1 1 350px; max-width: 400px; text-align: left;">
+
+                    <!-- Email -->
+                    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #D4AF37, #FFD700); display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-envelope" style="color: #fff; font-size: 24px;"></i>
                         </div>
-                        
-                        <h1 style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">Admin Portal</h1>
-                        <p style="color: var(--text-secondary); font-size: 16px; line-height: 1.5;">Secure access to Varnika Jewellers management dashboard</p>
-                        
-                        <!-- Security badges -->
-                        <div style="display: flex; justify-content: center; gap: 16px; margin-top: 20px;">
-                            <div style="display: flex; align-items: center; gap: 6px; background: rgba(32, 178, 170, 0.1); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--sea-green); font-weight: 600;">
-                                <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-shield-alt"></i>
-                                <span>Secure</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 6px; background: rgba(32, 178, 170, 0.1); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--sea-green); font-weight: 600;">
-                                <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-lock"></i>
-                                <span>Encrypted</span>
-                            </div>
+                        <div>
+                            <h3 style="font-size: 18px; font-weight: 600; color: #800000; margin-bottom: 5px;">Email</h3>
+                            <a href="mailto:vernikajewellers56@gmail.com" style="color: var(--text-light); font-size: 16px; text-decoration: none;">vernikajewellers56@gmail.com</a>
                         </div>
                     </div>
-                    
-                    <form onsubmit="adminLogin(event)" style="display: grid; gap: 28px;">
-                        <!-- Username Field -->
-                        <div class="form-group" style="position: relative;">
-                            <label style="display: block; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); font-size: 16px;">
-                                <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-user" style="margin-right: 8px; color: var(--sea-green);"></i>Administrator Username
-                            </label>
-                            <div style="position: relative;">
-                                <input type="text" id="admin-username-page" required style="width: 100%; padding: 18px 20px 18px 50px; border: 2px solid var(--border-color); border-radius: 12px; background: var(--bg-primary); color: var(--text-primary); font-size: 16px; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);" placeholder="Enter your username">
-                                <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-user" style="position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--sea-green); font-size: 16px;"></i>
-                            </div>
+
+                    <!-- WhatsApp -->
+                    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background-color: #25D366; display: flex; align-items: center; justify-content: center;">
+                            <i class="fab fa-whatsapp" style="color: #fff; font-size: 24px;"></i>
                         </div>
-                        
-                        <!-- Password Field -->
-                        <div class="form-group" style="position: relative;">
-                            <label style="display: block; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); font-size: 16px;">
-                                <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-lock" style="margin-right: 8px; color: var(--sea-green);"></i>Administrator Password
-                            </label>
-                            <div style="position: relative;">
-                                <input type="password" id="admin-password-page" required style="width: 100%; padding: 18px 20px 18px 50px; border: 2px solid var(--border-color); border-radius: 12px; background: var(--bg-primary); color: var(--text-primary); font-size: 16px; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);" placeholder="Enter your password">
-                                <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-lock" style="position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--sea-green); font-size: 16px;"></i>
-                                <button type="button" onclick="togglePasswordVisibility()" style="position: absolute; right: 18px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 16px;">
-                                    <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-eye" id="password-toggle-icon"></i>
-                                </button>
-                            </div>
+                        <div>
+                            <h3 style="font-size: 18px; font-weight: 600; color: #800000; margin-bottom: 5px;">WhatsApp</h3>
+                            <a href="https://wa.me/919034348408" style="color: var(--text-light); font-size: 16px; text-decoration: none;">+91 90343 48408</a>
                         </div>
-                        
-                        <!-- Login Button -->
-                        <button type="submit" style="width: 100%; background: linear-gradient(135deg, var(--sea-green), var(--sea-green-dark)); color: white; padding: 18px; border-radius: 12px; border: none; font-weight: 700; font-size: 18px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 8px 16px rgba(32, 178, 170, 0.3); position: relative; overflow: hidden;">
-                            <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: left 0.5s;"></div>
-                            <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-sign-in-alt"></i>
-                            <span>Access Dashboard</span>
-                        </button>
-                        
-                        <!-- Divider -->
-                        <div style="display: flex; align-items: center; gap: 16px; margin: 8px 0;">
-                            <div style="flex: 1; height: 1px; background: var(--border-color);"></div>
-                            <span style="color: var(--text-secondary); font-size: 14px; font-weight: 500;">OR</span>
-                            <div style="flex: 1; height: 1px; background: var(--border-color);"></div>
+                    </div>
+
+                    <!-- Business Hours -->
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #D4AF37, #FFD700); display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-clock" style="color: #fff; font-size: 24px;"></i>
                         </div>
-                        
-                        <!-- Back Button -->
-                        <button type="button" onclick="showPage('home')" style="width: 100%; background: transparent; color: var(--text-secondary); padding: 16px; border: 2px solid var(--border-color); border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                            <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-arrow-left"></i>
-                            <span>Return to Website</span>
+                        <div>
+                            <h3 style="font-size: 18px; font-weight: 600; color: #800000; margin-bottom: 5px;">Business Hours</h3>
+                            <p style="color: var(--text-light); font-size: 16px; margin: 0;">Mon - Sat: 10:00 AM - 8:00 PM</p>
+                            <p style="color: var(--text-light); font-size: 16px; margin: 0;">Sunday: 11:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Contact Form -->
+                <div style="flex: 1 1 400px; max-width: 450px; background-color: var(--bg-dark-card, #f9f9f9); padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+                    <h3 style="font-size: 24px; font-weight: 600; color: #D4AF37; margin-bottom: 25px; text-align: center;">Send us a Message</h3>
+                    <form style="display: flex; flex-direction: column; gap: 20px;">
+                        <input type="text" placeholder="Your Name" 
+                               style="padding: 12px 16px; font-size: 16px; border-radius: 10px; border: 1px solid #ccc; outline: none; width: 100%; 
+                                      background-color: var(--input-bg, #fff); color: var(--input-text, #333);">
+                        <input type="email" placeholder="Your Email" 
+                               style="padding: 12px 16px; font-size: 16px; border-radius: 10px; border: 1px solid #ccc; outline: none; width: 100%; 
+                                      background-color: var(--input-bg, #fff); color: var(--input-text, #333);">
+                        <textarea rows="5" placeholder="Your Message" 
+                                  style="padding: 12px 16px; font-size: 16px; border-radius: 10px; border: 1px solid #ccc; outline: none; width: 100%; 
+                                         background-color: var(--input-bg, #fff); color: var(--input-text, #333);"></textarea>
+                        <button type="button" onclick="sendContactMessage()" 
+                                style="padding: 14px 0; font-size: 18px; font-weight: 600; color: #fff; border-radius: 12px; border: none; 
+                                       background: linear-gradient(135deg, #D4AF37, #FFD700); cursor: pointer; transition: 0.3s;">
+                            Send Message via WhatsApp
                         </button>
                     </form>
-                    
-                    <!-- Footer Info -->
-                    <div style="text-align: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-color);">
-                        <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.4;">
-                            <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-info-circle" style="margin-right: 4px;"></i>
-                            This is a secure area. Only authorized personnel should access this portal.
-                        </p>
-                        <p style="font-size: 11px; color: var(--text-secondary); margin-top: 8px; opacity: 0.7;">
-                            © 2024 Varnika Jewellers. All rights reserved.
-                        </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<!-- Admin Login Page -->
+<div id="admin-login-page" class="page hidden">
+    <section class="section" style="background: linear-gradient(135deg, var(--sea-green), var(--sea-green-dark), var(--sea-green-light)); min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+        <!-- Animated Background Elements -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+            <div style="position: absolute; top: 10%; left: 10%; width: 200px; height: 200px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
+            <div style="position: absolute; top: 60%; right: 15%; width: 150px; height: 150px; background: rgba(255, 255, 255, 0.08); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; animation: float 8s ease-in-out infinite reverse;"></div>
+            <div style="position: absolute; bottom: 20%; left: 20%; width: 100px; height: 100px; background: rgba(255, 255, 255, 0.06); border-radius: 20px; transform: rotate(45deg); animation: float 10s ease-in-out infinite;"></div>
+            <div style="position: absolute; top: 30%; right: 30%; width: 80px; height: 80px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; animation: float 7s ease-in-out infinite;"></div>
+        </div>
+        
+        <div class="luxury-card" style="max-width: 500px; width: 100%; margin: 20px; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3); position: relative; z-index: 10;">
+            <!-- Header Section -->
+            <div style="text-align: center; margin-bottom: 40px; position: relative;">
+                <!-- Logo with glow effect -->
+                <div style="position: relative; display: inline-block; margin-bottom: 24px;">
+                    <div style="width: 100px; height: 100px; background: linear-gradient(135deg, var(--sea-green), var(--sea-green-light)); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(32, 178, 170, 0.4); position: relative;">
+                        <i class="fas fa-user-shield" style="color: #D4AF37; font-size: 40px;"></i>
+                        <!-- Glow rings -->
+                        <div style="position: absolute; width: 120px; height: 120px; border: 2px solid rgba(32, 178, 170, 0.3); border-radius: 50%; animation: pulse 2s infinite;"></div>
+                        <div style="position: absolute; width: 140px; height: 140px; border: 1px solid rgba(32, 178, 170, 0.2); border-radius: 50%; animation: pulse 2s infinite 0.5s;"></div>
                     </div>
                 </div>
-            </section>
-        </div>
-
-        <!-- Admin Page -->
-        <div id="admin-page" class="page hidden">
-            <section class="section" style="background-color: var(--bg-primary); min-height: 100vh;">
-                <div class="container">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
-                        <h1 style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--sea-green);">Admin Dashboard</h1>
-                        <button onclick="adminLogout()" style="background: #ef4444; color: white; padding: 12px 24px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s;">
-                            <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-sign-out-alt" style="margin-right: 8px;"></i>Logout
-                        </button>
+                
+                <h1 style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: #D4AF37; margin-bottom: 12px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">Admin Portal</h1>
+                <p style="color: #D4AF37; font-size: 16px; line-height: 1.5;">Secure access to Varnika Jewellers management dashboard</p>
+                
+                <!-- Security badges -->
+                <div style="display: flex; justify-content: center; gap: 16px; margin-top: 20px;">
+                    <div style="display: flex; align-items: center; gap: 6px; background: rgba(32, 178, 170, 0.1); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: #D4AF37; font-weight: 600;">
+                        <i class="fas fa-shield-alt" style="color: #D4AF37;"></i>
+                        <span>Secure</span>
                     </div>
-                    
-                    <!-- Admin Navigation Tabs -->
-                    <div style="display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap;">
-                        <button onclick="showAdminTab('rates')" id="rates-tab" class="admin-tab active" style="padding: 12px 24px; border: none; border-radius: 8px; background: var(--sea-green); color: white; font-weight: 600; cursor: pointer; transition: all 0.3s;">
-                            <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-chart-line" style="margin-right: 8px;"></i>Live Rates
-                        </button>
-                        <button onclick="showAdminTab('products')" id="products-tab" class="admin-tab" style="padding: 12px 24px; border: none; border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary); font-weight: 600; cursor: pointer; transition: all 0.3s;">
-                            <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-gem" style="margin-right: 8px;"></i>Manage Products
-                        </button>
-                        <button onclick="showAdminTab('add-product')" id="add-product-tab" class="admin-tab" style="padding: 12px 24px; border: none; border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary); font-weight: 600; cursor: pointer; transition: all 0.3s;">
-                            <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-plus" style="margin-right: 8px;"></i>Add Product
-                        </button>
-                    </div>
-                    
-                    <!-- Rates Management Tab -->
-                    <div id="admin-rates-content" class="admin-content">
-                        <div class="luxury-card" style="max-width: 600px; margin: 0 auto;">
-                            <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: var(--text-primary); text-align: center;">Update Live Rates</h2>
-                            
-                            <div style="display: grid; gap: 20px;">
-                                <div class="form-group">
-                                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">24K Gold Rate (₹/gram)</label>
-                                    <input type="number" id="admin-gold-rate" step="0.01" min="0" style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary); font-size: 16px;">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Silver Rate (₹/gram)</label>
-                                    <input type="number" id="admin-silver-rate" step="0.01" min="0" style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary); font-size: 16px;">
-                                </div>
-                                
-                                <div style="background: var(--bg-secondary); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
-                                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary);">Current Rates:</h3>
-                                    <div style="display: grid; gap: 8px; font-size: 14px;">
-                                        <div style="display: flex; justify-content: space-between;">
-                                            <span style="color: var(--text-secondary);">24K Gold:</span>
-                                            <span style="font-weight: 600; color: var(--text-primary);">₹<span id="current-24k">--</span>/g</span>
-                                        </div>
-                                        <div style="display: flex; justify-content: space-between;">
-                                            <span style="color: var(--text-secondary);">22K Gold:</span>
-                                            <span style="font-weight: 600; color: var(--text-primary);">₹<span id="current-22k">--</span>/g</span>
-                                        </div>
-                                        <div style="display: flex; justify-content: space-between;">
-                                            <span style="color: var(--text-secondary);">18K Gold:</span>
-                                            <span style="font-weight: 600; color: var(--text-primary);">₹<span id="current-18k">--</span>/g</span>
-                                        </div>
-                                        <div style="display: flex; justify-content: space-between;">
-                                            <span style="color: var(--text-secondary);">Silver:</span>
-                                            <span style="font-weight: 600; color: var(--text-primary);">₹<span id="current-silver">--</span>/g</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <button onclick="updateRates()" style="width: 100%; background: var(--sea-green); color: white; padding: 16px; border-radius: 8px; border: none; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s;">
-                                    <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-save" style="margin-right: 8px;"></i>Update Rates
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Products Management Tab -->
-                    <div id="admin-products-content" class="admin-content hidden">
-                        <div class="luxury-card">
-                            <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: var(--text-primary);">Manage Products</h2>
-                            
-                            <div style="display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap;">
-                                <select id="admin-category-filter" onchange="loadAdminProducts()" style="padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary);">
-                                    <option value="">All Categories</option>
-                                    <option value="gold">Gold</option>
-                                    <option value="silver">Silver</option>
-                                </select>
-                                <select id="admin-subcategory-filter" onchange="loadAdminProducts()" style="padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary);">
-                                    <option value="">All Subcategories</option>
-                                </select>
-                            </div>
-                            
-                            <div id="admin-products-list" style="display: grid; gap: 16px;">
-                                <!-- Products will be loaded here -->
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Add Product Tab -->
-                    <div id="admin-add-product-content" class="admin-content hidden">
-                        <div class="luxury-card" style="max-width: 800px; margin: 0 auto;">
-                            <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: var(--text-primary);">Add New Product</h2>
-                            
-                            <form onsubmit="addNewProduct(event)" style="display: grid; gap: 20px;">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                                    <div class="form-group">
-                                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Product Name</label>
-                                        <input type="text" id="new-product-name" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary);">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Weight (grams)</label>
-                                        <input type="number" id="new-product-weight" step="0.1" min="0.1" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary);">
-                                    </div>
-                                </div>
-                                
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                                    <div class="form-group">
-                                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Category</label>
-                                        <select id="new-product-category" onchange="updateSubcategoryOptions()" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary);">
-                                            <option value="">Select Category</option>
-                                            <option value="gold">Gold</option>
-                                            <option value="silver">Silver</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Subcategory</label>
-                                        <select id="new-product-subcategory" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary);">
-                                            <option value="">Select Subcategory</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Description</label>
-                                    <textarea id="new-product-description" rows="3" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary); resize: vertical;"></textarea>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Image URL</label>
-                                    <input type="url" id="new-product-image" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary);">
-                                    <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Enter a valid image URL (https://...)</p>
-                                </div>
-                                
-                                <button type="submit" style="width: 100%; background: var(--sea-green); color: white; padding: 16px; border-radius: 8px; border: none; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s;">
-                                    <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-plus" style="margin-right: 8px;"></i>Add Product
-                                </button>
-                            </form>
-                        </div>
+                    <div style="display: flex; align-items: center; gap: 6px; background: rgba(32, 178, 170, 0.1); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: #D4AF37; font-weight: 600;">
+                        <i class="fas fa-lock" style="color: #D4AF37;"></i>
+                        <span>Encrypted</span>
                     </div>
                 </div>
-            </section>
-        </div>
-
-        <!-- Subcategory Page -->
-        <div id="subcategory-page" class="page hidden">
-            <section class="py-16 bg-white">
-                <div class="container mx-auto px-4">
-                    <div class="flex items-center justify-between mb-8">
-                        <h1 id="subcategory-title" class="text-4xl font-playfair font-bold gold-text"></h1>
-                        <button onclick="goBack()" class="flex items-center space-x-2 text-gray-600 hover:text-yellow-600">
-                            <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-arrow-left"></i>
-                            <span>Back</span>
+            </div>
+            
+            <form onsubmit="adminLogin(event)" style="display: grid; gap: 28px;">
+                <!-- Username Field -->
+                <div class="form-group" style="position: relative;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 10px; color: #D4AF37; font-size: 16px;">
+                        <i class="fas fa-user" style="margin-right: 8px; color: #D4AF37;"></i>Administrator Username
+                    </label>
+                    <div style="position: relative;">
+                        <input type="text" id="admin-username-page" required style="width: 100%; padding: 18px 20px 18px 50px; border: 2px solid var(--border-color); border-radius: 12px; background: var(--bg-primary); color: #D4AF37; font-size: 16px; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);" placeholder="Enter your username">
+                        <i class="fas fa-user" style="position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #D4AF37; font-size: 16px;"></i>
+                    </div>
+                </div>
+                
+                <!-- Password Field -->
+                <div class="form-group" style="position: relative;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 10px; color: #D4AF37; font-size: 16px;">
+                        <i class="fas fa-lock" style="margin-right: 8px; color: #D4AF37;"></i>Administrator Password
+                    </label>
+                    <div style="position: relative;">
+                        <input type="password" id="admin-password-page" required style="width: 100%; padding: 18px 20px 18px 50px; border: 2px solid var(--border-color); border-radius: 12px; background: var(--bg-primary); color: #D4AF37; font-size: 16px; transition: all 0.3s; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);" placeholder="Enter your password">
+                        <i class="fas fa-lock" style="position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #D4AF37; font-size: 16px;"></i>
+                        <button type="button" onclick="togglePasswordVisibility()" style="position: absolute; right: 18px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #D4AF37; cursor: pointer; font-size: 16px;">
+                            <i class="fas fa-eye" id="password-toggle-icon" style="color: #D4AF37;"></i>
                         </button>
                     </div>
-                    <div id="products-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                </div>
+                
+                <!-- Login Button -->
+                <button type="submit" style="width: 100%; background: linear-gradient(135deg, var(--sea-green), var(--sea-green-dark)); color: #D4AF37; padding: 18px; border-radius: 12px; border: none; font-weight: 700; font-size: 18px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 8px 16px rgba(32, 178, 170, 0.3); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: left 0.5s;"></div>
+                    <i class="fas fa-sign-in-alt" style="color: #D4AF37;"></i>
+                    <span>Access Dashboard</span>
+                </button>
+                
+                <!-- Divider -->
+                <div style="display: flex; align-items: center; gap: 16px; margin: 8px 0;">
+                    <div style="flex: 1; height: 1px; background: var(--border-color);"></div>
+                    <span style="color: #D4AF37; font-size: 14px; font-weight: 500;">OR</span>
+                    <div style="flex: 1; height: 1px; background: var(--border-color);"></div>
+                </div>
+                
+                <!-- Back Button -->
+                <button type="button" onclick="showPage('home')" style="width: 100%; background: transparent; color: #D4AF37; padding: 16px; border: 2px solid var(--border-color); border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <i class="fas fa-arrow-left" style="color: #D4AF37;"></i>
+                    <span>Return to Website</span>
+                </button>
+            </form>
+            
+            <!-- Footer Info -->
+            <div style="text-align: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-color);">
+                <p style="font-size: 12px; color: #D4AF37; line-height: 1.4;">
+                    <i class="fas fa-info-circle" style="margin-right: 4px; color: #D4AF37;"></i>
+                    This is a secure area. Only authorized personnel should access this portal.
+                </p>
+                <p style="font-size: 11px; color: #D4AF37; margin-top: 8px; opacity: 0.7;">
+                    © 2025 Varnika Jewellers. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- Admin Page -->
+<div id="admin-page" class="page hidden">
+    <section class="section" style="background-color: var(--bg-primary); min-height: 100vh;">
+        <div class="container">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
+                <h1 style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: #D4AF37;">Admin Dashboard</h1>
+                <button onclick="adminLogout()" style="background: #ef4444; color: #D4AF37; padding: 12px 24px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                    <i style="color:#D4AF37; font-size:20px;" class="fas fa-sign-out-alt" style="margin-right: 8px;"></i>Logout
+                </button>
+            </div>
+            
+            <!-- Admin Navigation Tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap;">
+                <button onclick="showAdminTab('rates')" id="rates-tab" class="admin-tab active" style="padding: 12px 24px; border: none; border-radius: 8px; background: var(--sea-green); color: #D4AF37; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                    <i style="color:#D4AF37; font-size:20px;" class="fas fa-chart-line" style="margin-right: 8px;"></i>Live Rates
+                </button>
+                <button onclick="showAdminTab('products')" id="products-tab" class="admin-tab" style="padding: 12px 24px; border: none; border-radius: 8px; background: var(--bg-secondary); color: #D4AF37; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                    <i style="color:#D4AF37; font-size:20px;" class="fas fa-gem" style="margin-right: 8px;"></i>Manage Products
+                </button>
+                <button onclick="showAdminTab('add-product')" id="add-product-tab" class="admin-tab" style="padding: 12px 24px; border: none; border-radius: 8px; background: var(--bg-secondary); color: #D4AF37; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                    <i style="color:#D4AF37; font-size:20px;" class="fas fa-plus" style="margin-right: 8px;"></i>Add Product
+                </button>
+            </div>
+            
+            <!-- Rates Management Tab -->
+            <div id="admin-rates-content" class="admin-content">
+                <div class="luxury-card" style="max-width: 600px; margin: 0 auto;">
+                    <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: #D4AF37; text-align: center;">Update Live Rates</h2>
+                    
+                    <div style="display: grid; gap: 20px;">
+                        <div class="form-group">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">24K Gold Rate (₹/gram)</label>
+                            <input type="number" id="admin-gold-rate" step="0.01" min="0" style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37; font-size: 16px;">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">Silver Rate (₹/gram)</label>
+                            <input type="number" id="admin-silver-rate" step="0.01" min="0" style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37; font-size: 16px;">
+                        </div>
+                        
+                        <div style="background: var(--bg-secondary); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #D4AF37;">Current Rates:</h3>
+                            <div style="display: grid; gap: 8px; font-size: 14px;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: #D4AF37;">24K Gold:</span>
+                                    <span style="font-weight: 600; color: #D4AF37;">₹<span id="current-24k">--</span>/g</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: #D4AF37;">22K Gold:</span>
+                                    <span style="font-weight: 600; color: #D4AF37;">₹<span id="current-22k">--</span>/g</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: #D4AF37;">18K Gold:</span>
+                                    <span style="font-weight: 600; color: #D4AF37;">₹<span id="current-18k">--</span>/g</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: #D4AF37;">Silver:</span>
+                                    <span style="font-weight: 600; color: #D4AF37;">₹<span id="current-silver">--</span>/g</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="updateRates()" style="width: 100%; background: var(--sea-green); color: #D4AF37; padding: 16px; border-radius: 8px; border: none; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s;">
+                            <i style="color:#D4AF37; font-size:20px;" class="fas fa-save" style="margin-right: 8px;"></i>Update Rates
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Products Management Tab -->
+            <div id="admin-products-content" class="admin-content hidden">
+                <div class="luxury-card">
+                    <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: #D4AF37;">Manage Products</h2>
+                    
+                    <div style="display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap;">
+                        <select id="admin-category-filter" onchange="loadAdminProducts()" style="padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37;">
+                            <option value="">All Categories</option>
+                            <option value="gold">Gold</option>
+                            <option value="silver">Silver</option>
+                        </select>
+                        <select id="admin-subcategory-filter" onchange="loadAdminProducts()" style="padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37;">
+                            <option value="">All Subcategories</option>
+                        </select>
+                    </div>
+                    
+                    <div id="admin-products-list" style="display: grid; gap: 16px;">
                         <!-- Products will be loaded here -->
                     </div>
                 </div>
-            </section>
+            </div>
+            
+            <!-- Add Product Tab -->
+            <div id="admin-add-product-content" class="admin-content hidden">
+                <div class="luxury-card" style="max-width: 800px; margin: 0 auto;">
+                    <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: #D4AF37;">Add New Product</h2>
+                    
+                    <form onsubmit="addNewProduct(event)" style="display: grid; gap: 20px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="form-group">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">Product Name</label>
+                                <input type="text" id="new-product-name" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37;">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">Weight (grams)</label>
+                                <input type="number" id="new-product-weight" step="0.1" min="0.1" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37;">
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="form-group">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">Category</label>
+                                <select id="new-product-category" onchange="updateSubcategoryOptions()" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37;">
+                                    <option value="">Select Category</option>
+                                    <option value="gold">Gold</option>
+                                    <option value="silver">Silver</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">Subcategory</label>
+                                <select id="new-product-subcategory" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37;">
+                                    <option value="">Select Subcategory</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">Description</label>
+                            <textarea id="new-product-description" rows="3" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37; resize: vertical;"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">Image URL</label>
+                            <input type="url" id="new-product-image" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37;">
+                            <p style="font-size: 12px; color: #D4AF37; margin-top: 4px;">Enter a valid image URL (https://...)</p>
+                        </div>
+                        
+                        <button type="submit" style="width: 100%; background: var(--sea-green); color: #D4AF37; padding: 16px; border-radius: 8px; border: none; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s;">
+                            <i style="color:#D4AF37; font-size:20px;" class="fas fa-plus" style="margin-right: 8px;"></i>Add Product
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </main>
+    </section>
+</div>
+
+<!-- Subcategory Page -->
+<div id="subcategory-page" class="page hidden">
+    <section class="py-16 bg-#D4AF37">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between mb-8">
+                <h1 id="subcategory-title" class="text-4xl font-playfair font-bold" style="color:#D4AF37;"></h1>
+                <button onclick="goBack()" class="flex items-center space-x-2" style="color:#D4AF37;">
+                    <i class="fas fa-arrow-left" style="color:#D4AF37;"></i>
+                    <span>back</span>
+                </button>
+            </div>
+            <div id="products-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </section>
+</div>
 
     <!-- Footer -->
     <footer style="background: #1f2937; color: white; padding: 60px 0 30px;">
@@ -3488,7 +3561,7 @@
                 </div>
             </div>
             <div style="border-top: 1px solid #374151; padding-top: 30px; text-align: center;">
-                <p style="color: #9ca3af; margin: 0;">&copy; 2024 Varnika Jewellers. All rights reserved. | Crafted with ❤️ for jewelry lovers</p>
+                <p style="color: #9ca3af; margin: 0;">&copy; 2024 Varnika Jewellers. All rights reserved. | Developer by DevXperts</p>
             </div>
         </div>
     </footer>
@@ -4910,73 +4983,74 @@
         }
 
         // Show edit product modal
-        function showEditProductModal(product, category, subcategory) {
-            // Create modal HTML
-            const modalHTML = `
-                <div id="edit-product-modal" class="modal" style="background: rgba(0, 0, 0, 0.7);">
-                    <div class="modal-content" style="max-width: 600px; max-height: 90vh; overflow-y: auto;">
-                        <div class="modal-header">
-                            <h3 style="display: flex; align-items: center; gap: 8px; color: var(--text-primary);">
-                                <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-edit" style="color: var(--sea-green);"></i>
-                                Edit Product
-                            </h3>
-                            <button onclick="closeEditProductModal()" class="modal-close">
-                                <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <form onsubmit="updateProduct(event, '${product.id}', '${category}', '${subcategory}')" style="display: grid; gap: 20px;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                                <div class="form-group">
-                                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Product Name</label>
-                                    <input type="text" id="edit-product-name" value="${product.name}" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary);">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Weight (grams)</label>
-                                    <input type="number" id="edit-product-weight" value="${product.weight}" step="0.1" min="0.1" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary);">
-                                </div>
-                            </div>
-                            
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                                <div class="form-group">
-                                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Category</label>
-                                    <select id="edit-product-category" onchange="updateEditSubcategoryOptions()" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary);">
-                                        <option value="gold" ${category === 'gold' ? 'selected' : ''}>Gold</option>
-                                        <option value="silver" ${category === 'silver' ? 'selected' : ''}>Silver</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Subcategory</label>
-                                    <select id="edit-product-subcategory" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary);">
-                                        <!-- Options will be populated by updateEditSubcategoryOptions -->
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Description</label>
-                                <textarea id="edit-product-description" rows="3" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary); resize: vertical;">${product.description}</textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Image URL</label>
-                                <input type="url" id="edit-product-image" value="${product.image}" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: var(--text-primary);">
-                                <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Enter a valid image URL (https://...)</p>
-                            </div>
-                            
-                            <div style="display: flex; gap: 12px;">
-                                <button type="submit" style="flex: 1; background: var(--sea-green); color: white; padding: 16px; border-radius: 8px; border: none; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s;">
-                                    <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-save" style="margin-right: 8px;"></i>Update Product
-                                </button>
-                                <button type="button" onclick="closeEditProductModal()" style="flex: 1; background: #6b7280; color: white; padding: 16px; border-radius: 8px; border: none; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s;">
-                                    <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-times" style="margin-right: 8px;"></i>Cancel
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+function showEditProductModal(product, category, subcategory) {
+    // Create modal HTML
+    const modalHTML = `
+        <div id="edit-product-modal" class="modal" style="background: rgba(0, 0, 0, 0.7);">
+            <div class="modal-content" style="max-width: 600px; max-height: 90vh; overflow-y: auto;">
+                <div class="modal-header">
+                    <h3 style="display: flex; align-items: center; gap: 8px; color: #D4AF37; font-family: 'Playfair Display', serif;">
+                        <i class="fas fa-edit" style="color: #D4AF37; font-size: 20px;"></i>
+                        Edit Product
+                    </h3>
+                    <button onclick="closeEditProductModal()" class="modal-close">
+                        <i class="fas fa-times" style="color: #D4AF37; font-size: 20px;"></i>
+                    </button>
                 </div>
-            `;
+                <form onsubmit="updateProduct(event, '${product.id}', '${category}', '${subcategory}')" style="display: grid; gap: 20px; color: #D4AF37; font-family: 'Playfair Display', serif;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">Product Name</label>
+                            <input type="text" id="edit-product-name" value="${product.name}" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37; font-family: 'Playfair Display', serif;">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">Weight (grams)</label>
+                            <input type="number" id="edit-product-weight" value="${product.weight}" step="0.1" min="0.1" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37; font-family: 'Playfair Display', serif;">
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">Category</label>
+                            <select id="edit-product-category" onchange="updateEditSubcategoryOptions()" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37; font-family: 'Playfair Display', serif;">
+                                <option value="gold" ${category === 'gold' ? 'selected' : ''}>Gold</option>
+                                <option value="silver" ${category === 'silver' ? 'selected' : ''}>Silver</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">Subcategory</label>
+                            <select id="edit-product-subcategory" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37; font-family: 'Playfair Display', serif;">
+                                <!-- Options will be populated by updateEditSubcategoryOptions -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">Description</label>
+                        <textarea id="edit-product-description" rows="3" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37; resize: vertical; font-family: 'Playfair Display', serif;">${product.description}</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #D4AF37;">Image URL</label>
+                        <input type="url" id="edit-product-image" value="${product.image}" required style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); color: #D4AF37; font-family: 'Playfair Display', serif;">
+                        <p style="font-size: 12px; color: #D4AF37; margin-top: 4px;">Enter a valid image URL (https://...)</p>
+                    </div>
+                    
+                    <div style="display: flex; gap: 12px;">
+                        <button type="submit" style="flex: 1; background: var(--sea-green); color: white; padding: 16px; border-radius: 8px; border: none; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s;">
+                            <i class="fas fa-save" style="color:#D4AF37; margin-right: 8px;"></i>Update Product
+                        </button>
+                        <button type="button" onclick="closeEditProductModal()" style="flex: 1; background: #6b7280; color: white; padding: 16px; border-radius: 8px; border: none; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.3s;">
+                            <i class="fas fa-times" style="color:#D4AF37; margin-right: 8px;"></i>Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+
             
             // Add modal to body
             document.body.insertAdjacentHTML('beforeend', modalHTML);
