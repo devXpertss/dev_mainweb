@@ -822,210 +822,231 @@
                 opacity: 1;
             }
         }
-        <!-- Header -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- HEADER -->
 <header>
-    <div class="header-content">
-
-        <!-- Logo Section -->
-        <div class="logo-section">
-            <img src="https://i.postimg.cc/mkLTwNcm/logo.jpg" alt="Varnika Jewellers">
-            <div class="logo-text">
-                <h1>Varnika Jewellers</h1>
-                <p>Premium Gold & Silver Jewelry</p>
-            </div>
-        </div>
-
-        <!-- Header Actions -->
-        <div class="header-actions">
-            <!-- Wishlist -->
-            <button id="wishlist-button">
-                <i class="fas fa-heart"></i>
-                <span id="wishlist-count" class="hidden">0</span>
-            </button>
-
-            <!-- Cart -->
-            <button id="cart-button">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="cart-count" class="hidden">0</span>
-            </button>
-
-            <!-- Hamburger Menu Button -->
-            <button id="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
+  <div class="header-content">
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <img src="https://i.postimg.cc/mkLTwNcm/logo.jpg" alt="Varnika Jewellers">
+      <div class="logo-text">
+        <h1>Varnika Jewellers</h1>
+        <p>Premium Gold & Silver Jewelry</p>
+      </div>
     </div>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <!-- Navigation Links -->
-        <a href="#" onclick="showPage('home')">Home</a>
-        <a href="#" onclick="showPage('about')">About</a>
-        <div class="dropdown">
-            <a href="#">Gold Jewellery</a>
-            <div class="dropdown-menu">
-                <a href="#" onclick="showSubcategory('gold', 'chains')">Chains</a>
-                <a href="#" onclick="showSubcategory('gold', 'rings')">Rings</a>
-                <a href="#" onclick="showSubcategory('gold', 'sets')">Sets</a>
-                <a href="#" onclick="showSubcategory('gold', 'bangles')">Bangles</a>
-                <a href="#" onclick="showSubcategory('gold', 'mangalsutra')">Mangal Sutra</a>
-                <a href="#" onclick="showSubcategory('gold', 'tops')">Tops</a>
-                <a href="#" onclick="showSubcategory('gold', 'jhumka')">Jhumka</a>
-                <a href="#" onclick="showSubcategory('gold', 'pendants')">Pendants</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <a href="#">Silver Jewellery</a>
-            <div class="dropdown-menu">
-                <a href="#" onclick="showSubcategory('silver', 'payal')">Payal</a>
-                <a href="#" onclick="showSubcategory('silver', 'chains')">Chains</a>
-                <a href="#" onclick="showSubcategory('silver', 'rings')">Rings</a>
-                <a href="#" onclick="showSubcategory('silver', 'toerings')">Toe Rings</a>
-                <a href="#" onclick="showSubcategory('silver', 'mangalsutra')">Mangal Sutra</a>
-                <a href="#" onclick="showSubcategory('silver', 'kids')">Kids Items</a>
-                <a href="#" onclick="showSubcategory('silver', 'pooja')">Pooja Utensils</a>
-            </div>
-        </div>
-        <a href="#" onclick="showPage('contact')">Contact</a>
-
-        <!-- Theme Toggle -->
-        <button id="theme-toggle">
-            <i class="fas fa-moon"></i> Theme
-        </button>
-
-        <!-- Instagram -->
-        <a href="https://www.instagram.com/varnika.jewellerspnp?igsh=MXQyMGk3YzNycm14eQ==" target="_blank">
-            <i class="fab fa-instagram"></i> Instagram
-        </a>
-
-        <!-- Admin Login -->
-        <button onclick="showPage('admin-login')">
-            <i class="fas fa-user-shield"></i> Admin
-        </button>
+    <!-- Header Actions (Desktop) -->
+    <div class="header-actions">
+      <button id="wishlist-button">
+        <i class="fas fa-heart"></i>
+      </button>
+      <button id="cart-button">
+        <i class="fas fa-shopping-cart"></i>
+      </button>
+      <button id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <!-- Navigation Links -->
+    <a href="#" onclick="showPage('home')">Home</a>
+    <a href="#" onclick="showPage('about')">About</a>
+
+    <div class="dropdown">
+      <a href="#">Gold Jewellery</a>
+      <div class="dropdown-menu">
+        <a href="#" onclick="showSubcategory('gold','chains')">Chains</a>
+        <a href="#" onclick="showSubcategory('gold','rings')">Rings</a>
+        <a href="#" onclick="showSubcategory('gold','sets')">Sets</a>
+        <a href="#" onclick="showSubcategory('gold','bangles')">Bangles</a>
+        <a href="#" onclick="showSubcategory('gold','mangalsutra')">Mangal Sutra</a>
+        <a href="#" onclick="showSubcategory('gold','tops')">Tops</a>
+        <a href="#" onclick="showSubcategory('gold','jhumka')">Jhumka</a>
+        <a href="#" onclick="showSubcategory('gold','pendants')">Pendants</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <a href="#">Silver Jewellery</a>
+      <div class="dropdown-menu">
+        <a href="#" onclick="showSubcategory('silver','payal')">Payal</a>
+        <a href="#" onclick="showSubcategory('silver','chains')">Chains</a>
+        <a href="#" onclick="showSubcategory('silver','rings')">Rings</a>
+        <a href="#" onclick="showSubcategory('silver','toerings')">Toe Rings</a>
+        <a href="#" onclick="showSubcategory('silver','mangalsutra')">Mangal Sutra</a>
+        <a href="#" onclick="showSubcategory('silver','kids')">Kids Items</a>
+        <a href="#" onclick="showSubcategory('silver','pooja')">Pooja Utensils</a>
+      </div>
+    </div>
+
+    <a href="#" onclick="showPage('contact')">Contact</a>
+
+    <hr style="border: 0.5px solid rgba(212,175,55,0.3);">
+
+    <!-- All buttons inside dropdown -->
+    <button><i class="fas fa-heart"></i> Wishlist</button>
+    <button><i class="fas fa-shopping-cart"></i> Cart</button>
+    <button id="theme-toggle"><i class="fas fa-moon"></i> Theme</button>
+    <button onclick="showPage('admin-login')"><i class="fas fa-user-shield"></i> Admin</button>
+
+    <a href="https://www.instagram.com/varnika.jewellerspnp?igsh=MXQyMGk3YzNycm14eQ==" target="_blank">
+      <i class="fab fa-instagram"></i> Instagram
+    </a>
+  </div>
 </header>
 
-/* Header Base */
+<script>
+  const menuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("open");
+  });
+</script>
+
+
+/* Base Header */
 header {
-    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(247,231,206,0.9) 100%);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 0 0 1px rgba(212,175,55,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    border-bottom: 1px solid rgba(212,175,55,0.2);
-    font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(247,231,206,0.9));
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+  font-family: 'Poppins', sans-serif;
 }
 
-.theme-dark header {
-    background: linear-gradient(135deg, rgba(15,20,25,0.95) 0%, rgba(27,41,81,0.9) 100%);
-}
-
+/* Layout */
 .header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 16px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
 }
 
 .logo-section {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-
 .logo-section img {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    object-fit: cover;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  object-fit: cover;
 }
-
 .logo-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: bold;
-    background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-gold-dark));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1;
-    text-shadow: 0 2px 4px rgba(212,175,55,0.3);
-    margin:0;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
 }
-
 .logo-text p {
-    font-size: 11px;
-    color: #6b7280;
-    margin:0;
+  font-size: 10px;
+  margin: 0;
+  color: #6b7280;
 }
 
 .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header-actions button {
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.header-actions button:hover {
+  background: #f3f4f6;
+  color: var(--sea-green);
 }
 
-.header-actions button, .header-actions a {
-    padding: 8px;
-    border-radius: 50%;
-    background: none;
-    border: none;
-    color: #6b7280;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    width: 42px;
-    height: 42px;
-}
-
-.header-actions button:hover, .header-actions a:hover {
-    background: #f3f4f6;
-    color: var(--sea-green);
-    transform: scale(1.1);
-}
-
-/* Mobile Menu */
+/* Dropdown Mobile Menu */
 .mobile-menu {
-    display: none;
-    flex-direction: column;
-    gap: 12px;
-    background: var(--header-bg);
-    padding: 16px;
+  display: none;
+  flex-direction: column;
+  background: #fff;
+  padding: 14px;
+  border-top: 1px solid rgba(212,175,55,0.2);
+  animation: dropdown 0.3s ease forwards;
+}
+@keyframes dropdown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.mobile-menu.open {
+  display: flex;
+}
+.mobile-menu a,
+.mobile-menu button {
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 15px;
+  color: #333;
+  padding: 10px 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mobile-menu a:hover,
+.mobile-menu button:hover {
+  background: rgba(212,175,55,0.1);
+  border-radius: 6px;
 }
 
-.mobile-menu a, .mobile-menu button {
-    text-align: left;
-}
-
-/* RESPONSIVE MOBILE */
+/* Responsive Rules */
 @media (max-width: 768px) {
-    /* Hide other header actions except wishlist & cart */
-    .header-actions > button:not(#wishlist-button):not(#cart-button),
-    .header-actions > a {
-        display: none;
-    }
-
-    /* Show hamburger */
-    #mobile-menu-btn {
-        display: flex;
-    }
-
-    /* Hide search bar */
-    .search-bar {
-        display: none;
-    }
-
-    /* Mobile logo size */
-    .logo-text h1 {
-        font-size: 18px;
-    }
-    .logo-text p {
-        font-size: 10px;
-    }
+  #wishlist-button,
+  #cart-button {
+    display: none;
+  }
+  #mobile-menu-btn {
+    display: flex;
+  }
+  .logo-text h1 {
+    font-size: 18px;
+  }
+  .logo-text p {
+    font-size: 9px;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
 
         /* Navigation */
         nav {
@@ -2404,67 +2425,152 @@ header {
 
 
 
-
-
 <!-- Header -->
-<header style="background: var(--header-bg); transition: background 0.3s;">
-    <div class="container" style="display: flex; align-items: center; justify-content: space-between; padding: 6px 16px; font-family: 'Poppins', sans-serif;">
-        
-        <!-- Logo -->
-        <div class="logo-section" style="display: flex; align-items: center; gap: 8px;">
-            <img src="https://i.postimg.cc/mkLTwNcm/logo.jpg" alt="Varnika Jewellers" 
-                 onerror="this.src=''; this.alt='Varnika Jewellers'; this.style.display='none';"
-                 style="height: 36px; width: auto; object-fit: contain;">
-            <div class="logo-text" style="line-height: 1;">
-                <h1 style="font-size: 20px; font-weight: 700; color: var(--luxury-gold); margin: 0;">Varnika Jewellers</h1>
-                <p style="font-size: 12px; color: var(--text-secondary); margin: 0;">Premium Gold & Silver Jewelry</p>
-            </div>
-        </div>
+<header style="position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.1); transition: background 0.3s;">
+  <div class="container" style="display: flex; align-items: center; justify-content: space-between; padding: 6px 16px; font-family: 'Poppins', sans-serif; flex-wrap: wrap;">
+    
+    <!-- Logo -->
+    <div class="logo-section" style="display: flex; align-items: center; gap: 8px;">
+      <img src="https://i.postimg.cc/mkLTwNcm/logo.jpg" alt="Varnika Jewellers" 
+           onerror="this.src=''; this.alt='Varnika Jewellers'; this.style.display='none';"
+           style="height: 36px; width: auto; object-fit: contain;">
+      <div class="logo-text" style="line-height: 1;">
+        <h1 style="font-size: 20px; font-weight: 700; color: var(--luxury-gold); margin: 0;">Varnika Jewellers</h1>
+        <p style="font-size: 12px; color: var(--text-secondary); margin: 0;">Premium Gold & Silver Jewelry</p>
+      </div>
+    </div>
 
-        <!-- Search Bar -->
-        <div class="search-bar" style="position: relative; flex: 1; max-width: 320px; margin: 0 16px;">
-            <input type="text" id="search-input" placeholder="Search jewelry..."
-                   style="width: 100%; padding: 8px 36px 8px 12px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-primary); font-size: 14px; outline: none; transition: all 0.3s;">
-            <i class="fas fa-search" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--luxury-gold); font-size: 16px;"></i>
-        </div>
+    <!-- Desktop Search & Actions -->
+    <div class="header-desktop" style="display: flex; align-items: center; gap: 10px; flex: 1; justify-content: center;">
+      
+      <!-- Search Bar -->
+      <div class="search-bar" style="position: relative; max-width: 320px; flex: 1;">
+        <input type="text" id="search-input" placeholder="Search..."
+               style="width: 100%; padding: 8px 36px 8px 12px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-primary); font-size: 14px; outline: none; transition: all 0.3s;"
+               onkeyup="if(event.key==='Enter'){ performSearch(event.target.value); }">
+        <i class="fas fa-search" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--luxury-gold); font-size: 16px;"></i>
+      </div>
 
-        <!-- Header Actions -->
-        <div class="header-actions" style="display: flex; align-items: center; gap: 10px;">
-            <!-- Theme Toggle -->
-            <button id="theme-toggle" style="background: none; border: none; cursor: pointer;">
-                <i class="fas fa-moon" style="color: var(--luxury-gold); font-size: 18px;"></i>
-            </button>
-
-            <!-- Wishlist -->
-            <button onclick="showWishlist()" style="position: relative; background: none; border: none; cursor: pointer;">
-                <i class="fas fa-heart" style="color: var(--luxury-gold); font-size: 18px;"></i>
-                <span id="wishlist-count" class="hidden" style="position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; font-size: 10px; border-radius: 50%; height: 16px; width: 16px; display: flex; align-items: center; justify-content: center;">0</span>
-            </button>
-
-            <!-- Cart -->
-            <button onclick="showCart()" style="position: relative; background: none; border: none; cursor: pointer;">
-                <i class="fas fa-shopping-cart" style="color: var(--luxury-gold); font-size: 18px;"></i>
-                <span id="cart-count" class="hidden" style="position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; font-size: 10px; border-radius: 50%; height: 16px; width: 16px; display: flex; align-items: center; justify-content: center;">0</span>
-            </button>
-
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/varnika.jewellerspnp?igsh=MXQyMGk3YzNycm14eQ==" target="_blank">
-                <i class="fab fa-instagram" style="color: #e91e63; font-size: 18px;"></i>
-            </a>
-
-            <!-- Admin Login -->
-            <button onclick="showPage('admin-login')" style="padding: 6px; border-radius: 50%; background: none; border: none; cursor: pointer;">
-                <i class="fas fa-user-shield" style="color: var(--luxury-gold); font-size: 18px;"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn" style="display: none; background: none; border: none; cursor: pointer;">
-            <i class="fas fa-bars" style="color: var(--luxury-gold); font-size: 20px;"></i>
+      <!-- Header Actions -->
+      <div class="header-actions" style="display: flex; align-items: center; gap: 10px;">
+        <!-- Theme Toggle Desktop -->
+        <button id="theme-toggle" class="theme-toggle-btn" style="background: none; border: none; cursor: pointer;">
+          <i class="fas fa-moon" style="color: var(--luxury-gold); font-size: 18px;"></i>
         </button>
 
+        <!-- Wishlist -->
+        <button onclick="showWishlist()" style="position: relative; background: none; border: none; cursor: pointer;">
+          <i class="fas fa-heart" style="color: var(--luxury-gold); font-size: 18px;"></i>
+          <span id="wishlist-count" class="hidden" style="position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; font-size: 10px; border-radius: 50%; height: 16px; width: 16px; display: flex; align-items: center; justify-content: center;">0</span>
+        </button>
+
+        <!-- Cart -->
+        <button onclick="showCart()" style="position: relative; background: none; border: none; cursor: pointer;">
+          <i class="fas fa-shopping-cart" style="color: var(--luxury-gold); font-size: 18px;"></i>
+          <span id="cart-count" class="hidden" style="position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; font-size: 10px; border-radius: 50%; height: 16px; width: 16px; display: flex; align-items: center; justify-content: center;">0</span>
+        </button>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/varnika.jewellerspnp?igsh=MXQyMGk3YzNycm14eQ==" target="_blank">
+          <i class="fab fa-instagram" style="color: #e91e63; font-size: 15px;"></i>
+        </a>
+
+        <!-- Admin Login -->
+        <button onclick="showPage('admin-login')" style="padding: 6px; border-radius: 50%; background: none; border: none; cursor: pointer;">
+          <i class="fas fa-user-shield" style="color: var(--luxury-gold); font-size: 18px;"></i>
+        </button>
+      </div>
     </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-btn" style="display: none; background: none; border: none; cursor: pointer;">
+      <i class="fas fa-bars" style="color: var(--luxury-gold); font-size: 20px;"></i>
+    </button>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" style="display: none; width: 100%; margin-top: 10px;">
+      <div class="search-bar-mobile" style="position: relative; margin-bottom: 10px;">
+        <input type="text" placeholder="Search jewelry..."
+               style="width: 100%; padding: 8px 36px 8px 12px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-primary); font-size: 14px; outline: none; transition: all 0.3s;"
+               onkeyup="if(event.key==='Enter'){ performSearch(event.target.value); }">
+        <i class="fas fa-search" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--luxury-gold); font-size: 16px;"></i>
+      </div>
+      <div class="mobile-actions" style="display: flex; justify-content: space-around; align-items: center;">
+        <!-- Theme Toggle Mobile -->
+        <button class="theme-toggle-btn" style="background: none; border: none; cursor: pointer;">
+          <i class="fas fa-moon" style="color: var(--luxury-gold); font-size: 18px;"></i>
+        </button>
+        <button onclick="showWishlist()" style="background: none; border: none; cursor: pointer;">
+          <i class="fas fa-heart" style="color: var(--luxury-gold); font-size: 18px;"></i>
+        </button>
+        <button onclick="showCart()" style="background: none; border: none; cursor: pointer;">
+          <i class="fas fa-shopping-cart" style="color: var(--luxury-gold); font-size: 18px;"></i>
+        </button>
+        <a href="https://www.instagram.com/varnika.jewellerspnp?igsh=MXQyMGk3YzNycm14eQ==" target="_blank">
+          <i class="fab fa-instagram" style="color: #e91e63; font-size: 18px;"></i>
+        </a>
+        <button onclick="showPage('admin-login')" style="background: none; border: none; cursor: pointer;">
+          <i class="fas fa-user-shield" style="color: var(--luxury-gold); font-size: 18px;"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 </header>
+
+<!-- Scripts -->
+<script>
+  // Mobile Menu Toggle
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  mobileBtn.addEventListener('click', () => {
+    mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+  });
+
+  // Responsive display
+  function handleResize() {
+    if(window.innerWidth <= 768) {
+      mobileBtn.style.display = 'block';
+      document.querySelector('.header-desktop').style.display = 'none';
+    } else {
+      mobileBtn.style.display = 'none';
+      document.querySelector('.header-desktop').style.display = 'flex';
+      mobileMenu.style.display = 'none';
+    }
+  }
+  window.addEventListener('resize', handleResize);
+  window.addEventListener('load', handleResize);
+
+  // Theme Toggle (works on both desktop and mobile)
+  document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (typeof toggleTheme === 'function') toggleTheme();
+
+      const icon = btn.querySelector('i');
+      if (icon.classList.contains('fa-moon')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      } else if (icon.classList.contains('fa-sun')) {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      }
+    });
+  });
+
+  // Search functionality (desktop & mobile)
+  function performSearch(query){
+    if(!query) return;
+    alert('Searching for: ' + query);
+    // Replace alert with actual search logic
+  }
+</script>
+
+
+
+
+
+
+
+
 
 
 
