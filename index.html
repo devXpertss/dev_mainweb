@@ -2543,7 +2543,7 @@ header {
   // Theme Toggle (works on both desktop and mobile)
   document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      if (typeof toggleTheme === 'function') toggleTheme();
+      toggleTheme();
 
       const icon = btn.querySelector('i');
       if (icon.classList.contains('fa-moon')) {
@@ -3909,7 +3909,8 @@ header {
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
                 localStorage.setItem('theme', 'dark');
-            } else {
+            } else if (body.classList.contains('theme-dark')) {
+
                 body.classList.remove('theme-dark');
                 body.classList.add('theme-light');
                 icon.classList.remove('fa-sun');
@@ -4129,8 +4130,6 @@ header {
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
             // Load saved theme
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.body.classList.add(`theme-${savedTheme}`);
             
             const themeToggle = document.getElementById('theme-toggle');
             const icon = themeToggle.querySelector('i');
