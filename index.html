@@ -4130,6 +4130,9 @@ header {
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
             // Load saved theme
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.body.classList.add(`theme-${savedTheme}`);
+
             
             const themeToggle = document.getElementById('theme-toggle');
             const icon = themeToggle.querySelector('i');
@@ -4138,8 +4141,6 @@ header {
                 icon.classList.add('fa-sun');
             }
             
-            // Add theme toggle event listener
-            themeToggle.addEventListener('click', toggleTheme);
             
             // Update counts from loaded data
             updateCartCount();
