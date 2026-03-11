@@ -872,15 +872,16 @@
     <div class="dropdown">
       <a href="#">Gold Jewellery</a>
       <div class="dropdown-menu">
-        <a href="#" onclick="showSubcategory('gold','chains')">Chains</a>
-        <a href="#" onclick="showSubcategory('gold','rings')">Rings</a>
-        <a href="#" onclick="showSubcategory('gold','sets')">Sets</a>
-        <a href="#" onclick="showSubcategory('gold','bangles')">Bangles</a>
-        <a href="#" onclick="showSubcategory('gold','mangalsutra')">Mangal Sutra</a>
-        <a href="#" onclick="showSubcategory('gold','tops')">Tops</a>
-        <a href="#" onclick="showSubcategory('gold','jhumka')">Jhumka</a>
-        <a href="#" onclick="showSubcategory('gold','pendants')">Pendants</a>
-      </div>
+
+
+
+
+
+<a href="#" onclick="showSubcategory('gold','long_set')">Long set</a>
+
+
+
+     </div>
     </div>
 
     <div class="dropdown">
@@ -2592,15 +2593,17 @@ header {
                 <i class="fas fa-chevron-down" style="color: #D4AF37; font-size: 14px; margin-left: 5px;"></i>
             </a>
             <div class="dropdown-menu" style="font-family: 'Poppins', sans-serif; font-size: 16px;">
-                <a href="#" onclick="showSubcategory('gold', 'chains')" style="color: #D4AF37;">Chains</a>
-                <a href="#" onclick="showSubcategory('gold', 'rings')" style="color: #D4AF37;">Rings</a>
-                <a href="#" onclick="showSubcategory('gold', 'sets')" style="color: #D4AF37;">Sets</a>
-                <a href="#" onclick="showSubcategory('gold', 'bangles')" style="color: #D4AF37;">Bangles</a>
-                <a href="#" onclick="showSubcategory('gold', 'mangalsutra')" style="color: #D4AF37;">Mangal Sutra</a>
-                <a href="#" onclick="showSubcategory('gold', 'tops')" style="color: #D4AF37;">Tops</a>
-                <a href="#" onclick="showSubcategory('gold', 'jhumka')" style="color: #D4AF37;">Jhumka</a>
-                <a href="#" onclick="showSubcategory('gold', 'pendants')" style="color: #D4AF37;">Pendants</a>
-            </div>
+           
+
+
+
+
+<a href="#" onclick="showSubcategory('gold', 'long_set')">Long set</a>
+                
+
+
+
+ </div>
         </li>
         <li class="dropdown">
             <a href="#" onclick="toggleMobileDropdown(event, this)" class="nav-link" style="color: #D4AF37; text-decoration: none; font-weight: 600; font-size: 18px;">
@@ -3216,10 +3219,10 @@ header {
                                 <p class="text-gray-600">Beautiful gold rings</p>
                             </div>
                         </div>
-                        <div class="text-center group cursor-pointer" onclick="showSubcategory('gold', 'sets')">
+                        <div class="text-center group cursor-pointer" onclick="showSubcategory('gold', 'long_set')">
                             <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition group-hover:scale-105">
                                 <i style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color:#D4AF37; font-size:20px;" font-size:28px;" font-size:48px;" font-size:88px;" font-size:1008px;" font-size:28px;" style="color: maroon;" style="color: maroon;" style="color: maroon;" style="color: maroon;" class="fas fa-gem text-4xl gold-text mb-4"></i>
-                                <h3 class="text-xl font-semibold mb-2">Sets</h3>
+                                <h3 class="text-xl font-semibold mb-2">Long Set</h3>
                                 <p class="text-gray-600">Complete jewelry sets</p>
                             </div>
                         </div>
@@ -5119,7 +5122,7 @@ document.body.classList.add(`theme-${savedTheme}`);
             subcategorySelect.innerHTML = '<option value="">Select Subcategory</option>';
             
             const subcategories = {
-                gold: ['chains', 'rings', 'sets', 'bangles', 'mangalsutra', 'tops', 'jhumka', 'pendants'],
+gold: ['long_set'],
                 silver: ['payal', 'chains', 'rings', 'toerings', 'mangalsutra', 'kids', 'pooja']
             };
             
