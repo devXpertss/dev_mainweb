@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Varnika Jewellers – Crafting Dreams into Gold</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,8 @@
 <link rel="dns-prefetch" href="https://images.unsplash.com">
 <link rel="dns-prefetch" href="https://srijdata-default-rtdb.firebaseio.com">
 <meta name="theme-color" content="#070f0b">
+<link rel="icon" href="https://i.postimg.cc/VNkN8h7K/logo-zoom.jpg" type="image/jpeg">
+<link rel="apple-touch-icon" href="https://i.postimg.cc/VNkN8h7K/logo-zoom.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* ═══ CSS VARIABLES ═══ */
@@ -321,10 +323,20 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:clamp(30px,
 .gal-filter{display:flex;gap:8px;flex-wrap:wrap;padding:20px 20px 0}
 .gf{padding:7px 20px;border-radius:18px;border:1px solid var(--bdr);background:var(--bg3);color:var(--txt3);font-size:13px;font-weight:500;cursor:pointer;transition:var(--tr)}
 .gf:hover,.gf.act{background:var(--gold);border-color:var(--gold);color:#000}
-#LB{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;backdrop-filter:blur(20px)}
+/* ═══ IMAGE ZOOM LIGHTBOX ═══ */
+#LB{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.97);display:none;flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);user-select:none;-webkit-user-select:none}
 #LB.open{display:flex}
-#LB img{max-width:90vw;max-height:90vh;border-radius:var(--rs);object-fit:contain;border:1px solid var(--bdr2)}
-.lb-close{position:absolute;top:20px;right:20px;width:40px;height:40px;border-radius:50%;border:1px solid var(--bdr);background:var(--bg2);cursor:pointer;color:var(--txt);display:flex;align-items:center;justify-content:center;font-size:14px}
+#LB-CONTAINER{position:relative;width:100%;height:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:grab}
+#LB-CONTAINER.dragging{cursor:grabbing}
+#LBIMG{max-width:90vw;max-height:80vh;object-fit:contain;border-radius:8px;transition:none;transform-origin:center center;will-change:transform;touch-action:none;pointer-events:none;display:block;border:1px solid rgba(255,255,255,.1)}
+.lb-bar{position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:linear-gradient(to bottom,rgba(0,0,0,.75),transparent)}
+.lb-title{color:rgba(255,255,255,.85);font-family:'Playfair Display',serif;font-size:15px;font-style:italic;max-width:70%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-close{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.5);cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:background .2s}
+.lb-close:hover{background:rgba(255,255,255,.15)}
+.lb-controls{position:absolute;bottom:0;left:0;right:0;z-index:2;display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;background:linear-gradient(to top,rgba(0,0,0,.75),transparent)}
+.lb-btn{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.5);cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;transition:background .2s;flex-shrink:0}
+.lb-btn:hover{background:rgba(255,255,255,.15)}
+.lb-zoom-label{color:rgba(255,255,255,.8);font-size:13px;min-width:48px;text-align:center;font-family:'DM Sans',sans-serif;font-weight:600}
 
 /* ═══ REVIEWS ═══ */
 .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
@@ -543,7 +555,22 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:clamp(30px,
   <div class="pbody" id="WISHB"></div>
 </div>
 <div id="MODAL"><div class="mbox" id="MBOX"></div></div>
-<div id="LB"><button class="lb-close" onclick="closeLB()">✕</button><img id="LBIMG" src="" alt=""></div>
+<div id="LB">
+  <div class="lb-bar">
+    <span class="lb-title" id="LB-TITLE"></span>
+    <button class="lb-close" onclick="closeLB()" title="Close (ESC)">✕</button>
+  </div>
+  <div id="LB-CONTAINER">
+    <img id="LBIMG" src="" alt="" draggable="false">
+  </div>
+  <div class="lb-controls">
+    <button class="lb-btn" onclick="lbZoomOut()" title="Zoom Out">−</button>
+    <button class="lb-btn" onclick="lbReset()" title="Reset Zoom">⊙</button>
+    <span class="lb-zoom-label" id="LB-ZOOM">100%</span>
+    <button class="lb-btn" onclick="lbZoomIn()" title="Zoom In">+</button>
+    <button class="lb-btn" onclick="lbFull()" title="Max Zoom" style="font-size:12px;letter-spacing:-.02em">⤢</button>
+  </div>
+</div>
 <div id="TOAST"></div>
 
 <!-- ═══════════════ PAGE: HOME ═══════════════ -->
@@ -1149,13 +1176,137 @@ function renderGallery(cat='all'){
   if(!grid) return;
   const src = S.galleryImages.length ? S.galleryImages : DEFAULT_GALLERY;
   const imgs = cat==='all' ? src : src.filter(i=>i.cat===cat);
-  grid.innerHTML = imgs.map(i=>`<img src="${i.src}" alt="Jewellery" loading="lazy" crossorigin="anonymous" onclick="openLB('${i.src}')" onerror="imgRetry(this,'${i.src}')" onload="this.style.opacity='1'" style="opacity:0;transition:opacity .4s">`).join('');
+  grid.innerHTML = imgs.map(i=>`<img src="${i.src}" alt="Jewellery" loading="lazy" crossorigin="anonymous" onclick="openLB('${i.src}','Varnika Gallery')" onerror="imgRetry(this,'${i.src}')" onload="this.style.opacity='1'" style="opacity:0;transition:opacity .4s">`).join('');
   setTimeout(fixCachedImages, 200);
 }
 window.filterGal = function(cat,btn){ document.querySelectorAll('.gf').forEach(b=>b.classList.remove('act')); btn.classList.add('act'); renderGallery(cat); };
-window.openLB = function(src){ document.getElementById('LBIMG').src=src; document.getElementById('LB').classList.add('open'); };
-window.closeLB = function(){ document.getElementById('LB').classList.remove('open'); };
-document.getElementById('LB').addEventListener('click', function(e){ if(e.target===this) closeLB(); });
+/* ═══ IMAGE ZOOM ENGINE ═══ */
+const LB_STATE = { scale:1, minScale:0.5, maxScale:8, x:0, y:0, startX:0, startY:0, startTX:0, startTY:0, isDragging:false, lastDist:0 };
+
+window.openLB = function(src, title){
+  const img = document.getElementById('LBIMG');
+  const titleEl = document.getElementById('LB-TITLE');
+  img.style.opacity='0';
+  img.src = src;
+  img.onload = ()=>{ img.style.opacity='1'; };
+  if(titleEl) titleEl.textContent = title||'';
+  lbReset(false);
+  document.getElementById('LB').classList.add('open');
+  document.body.style.overflow='hidden';
+};
+
+window.closeLB = function(){
+  document.getElementById('LB').classList.remove('open');
+  document.body.style.overflow='';
+  lbReset(false);
+};
+
+function lbApplyTransform(animate){
+  const img = document.getElementById('LBIMG');
+  if(!img) return;
+  img.style.transition = animate ? 'transform 0.22s ease' : 'none';
+  img.style.transform = 'translate('+LB_STATE.x+'px,'+LB_STATE.y+'px) scale('+LB_STATE.scale+')';
+  const label = document.getElementById('LB-ZOOM');
+  if(label) label.textContent = Math.round(LB_STATE.scale*100)+'%';
+}
+
+function lbClampPan(){
+  const img = document.getElementById('LBIMG');
+  if(!img||!img.naturalWidth) return;
+  const mx = Math.max(0,(img.offsetWidth*LB_STATE.scale - window.innerWidth)/2 + 60);
+  const my = Math.max(0,(img.offsetHeight*LB_STATE.scale - window.innerHeight)/2 + 60);
+  LB_STATE.x = Math.max(-mx,Math.min(mx,LB_STATE.x));
+  LB_STATE.y = Math.max(-my,Math.min(my,LB_STATE.y));
+}
+
+window.lbZoomIn = function(){
+  LB_STATE.scale = Math.min(LB_STATE.maxScale, LB_STATE.scale*1.4);
+  lbClampPan(); lbApplyTransform(true);
+};
+window.lbZoomOut = function(){
+  LB_STATE.scale = Math.max(LB_STATE.minScale, LB_STATE.scale/1.4);
+  if(LB_STATE.scale<=1){ LB_STATE.x=0; LB_STATE.y=0; }
+  lbClampPan(); lbApplyTransform(true);
+};
+window.lbFull = function(){
+  const img = document.getElementById('LBIMG');
+  if(!img) return;
+  const sw = window.innerWidth/(img.offsetWidth||1);
+  const sh = window.innerHeight/(img.offsetHeight||1);
+  LB_STATE.scale = Math.min(LB_STATE.maxScale, Math.max(sw,sh)*2.5);
+  LB_STATE.x=0; LB_STATE.y=0;
+  lbApplyTransform(true);
+};
+window.lbReset = function(animate){
+  LB_STATE.scale=1; LB_STATE.x=0; LB_STATE.y=0;
+  lbApplyTransform(animate!==false);
+};
+
+// ── MOUSE WHEEL ZOOM ──
+document.getElementById('LB').addEventListener('wheel',function(e){
+  if(!document.getElementById('LB').classList.contains('open'))return;
+  e.preventDefault();
+  const d=e.deltaY>0?0.87:1.15;
+  LB_STATE.scale=Math.max(LB_STATE.minScale,Math.min(LB_STATE.maxScale,LB_STATE.scale*d));
+  if(LB_STATE.scale<=1){LB_STATE.x=0;LB_STATE.y=0;}
+  lbClampPan(); lbApplyTransform(false);
+},{passive:false});
+
+// ── MOUSE DRAG PAN ──
+const LB_CONT=document.getElementById('LB-CONTAINER');
+LB_CONT.addEventListener('mousedown',function(e){
+  if(e.target.closest('.lb-btn,.lb-close,.lb-bar,.lb-controls'))return;
+  if(LB_STATE.scale<=1.05)return;
+  LB_STATE.isDragging=true; LB_STATE.startX=e.clientX; LB_STATE.startY=e.clientY;
+  LB_STATE.startTX=LB_STATE.x; LB_STATE.startTY=LB_STATE.y;
+  LB_CONT.classList.add('dragging');
+});
+window.addEventListener('mousemove',function(e){
+  if(!LB_STATE.isDragging)return;
+  LB_STATE.x=LB_STATE.startTX+(e.clientX-LB_STATE.startX);
+  LB_STATE.y=LB_STATE.startTY+(e.clientY-LB_STATE.startY);
+  lbClampPan(); lbApplyTransform(false);
+});
+window.addEventListener('mouseup',function(){LB_STATE.isDragging=false;LB_CONT.classList.remove('dragging');});
+
+// ── DOUBLE-CLICK TOGGLE MAX ZOOM ──
+LB_CONT.addEventListener('dblclick',function(e){
+  if(e.target.closest('.lb-btn,.lb-close,.lb-bar,.lb-controls'))return;
+  if(LB_STATE.scale>1.5){lbReset();}else{lbFull();}
+});
+
+// ── TOUCH PINCH + DRAG ──
+LB_CONT.addEventListener('touchstart',function(e){
+  if(e.touches.length===2){
+    LB_STATE.lastDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+  } else if(e.touches.length===1&&LB_STATE.scale>1.05){
+    LB_STATE.isDragging=true; LB_STATE.startX=e.touches[0].clientX; LB_STATE.startY=e.touches[0].clientY;
+    LB_STATE.startTX=LB_STATE.x; LB_STATE.startTY=LB_STATE.y;
+  }
+},{passive:true});
+LB_CONT.addEventListener('touchmove',function(e){
+  if(e.touches.length===2){
+    e.preventDefault();
+    const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+    if(LB_STATE.lastDist>0){
+      LB_STATE.scale=Math.max(LB_STATE.minScale,Math.min(LB_STATE.maxScale,LB_STATE.scale*(d/LB_STATE.lastDist)));
+      if(LB_STATE.scale<=1){LB_STATE.x=0;LB_STATE.y=0;}
+      lbClampPan(); lbApplyTransform(false);
+    }
+    LB_STATE.lastDist=d;
+  } else if(e.touches.length===1&&LB_STATE.isDragging){
+    LB_STATE.x=LB_STATE.startTX+(e.touches[0].clientX-LB_STATE.startX);
+    LB_STATE.y=LB_STATE.startTY+(e.touches[0].clientY-LB_STATE.startY);
+    lbClampPan(); lbApplyTransform(false);
+  }
+},{passive:false});
+LB_CONT.addEventListener('touchend',function(){LB_STATE.isDragging=false;LB_STATE.lastDist=0;});
+
+// ── CLICK OUTSIDE TO CLOSE ──
+document.getElementById('LB').addEventListener('click',function(e){
+  const ctrl=e.target.closest('.lb-btn,.lb-close,.lb-bar,.lb-controls,.lb-zoom-label,#LB-CONTAINER');
+  if(!ctrl)closeLB();
+});
 
 /* ══ PRICE CALCULATION (always reads from S.rates) ══ */
 function calcPrice(p, carat){
@@ -1251,7 +1402,7 @@ function buildCard(p, carat='22k'){
   const caratSel = isSilver ? '' : `<div class="csel" id="cs-${p.id}"><button class="cbt${carat==='22k'?' act':''}" onclick="swCarat('${p.id}','22k')">22K</button><button class="cbt${carat==='18k'?' act':''}" onclick="swCarat('${p.id}','18k')">18K</button></div>`;
   return `<div class="pc rv" id="card-${p.id}">
   <div class="pc-img">
-    <img src="${imgSrc}" alt="${p.name}" loading="lazy" crossorigin="anonymous" onerror="imgRetry(this,'${imgSrc}')" onload="this.style.opacity='1'" style="opacity:0;transition:opacity .4s">
+    <img src="${imgSrc}" alt="${p.name}" loading="lazy" crossorigin="anonymous" onerror="imgRetry(this,'${imgSrc}')" onload="this.style.opacity='1'" style="opacity:0;transition:opacity .4s;cursor:zoom-in" onclick="openLB('${imgSrc}','${p.name}')" title="Click to zoom">
     <div class="pc-olay">
       <button class="poa${inWish?' act':''}" onclick="toggleWishItem('${p.id}')" title="Wishlist"><svg width="12" height="12" viewBox="0 0 24 24" fill="${inWish?'currentColor':'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
       <button class="poa" onclick="openModal('${p.id}')" title="View"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
